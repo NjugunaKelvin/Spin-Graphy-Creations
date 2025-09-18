@@ -1,2 +1,60 @@
 @import "tailwindcss";
 
+
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 26, 26, 26;
+  --background-end-rgb: 10, 10, 10;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: 'Outfit', sans-serif;
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(90deg, #ff6f3c, #ff9a3c, #ff6f3c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: gradientShift 3s ease-in-out infinite;
+  }
+  
+  .glow-effect {
+    text-shadow: 0 0 10px rgba(255, 111, 60, 0.5),
+                 0 0 20px rgba(255, 111, 60, 0.3),
+                 0 0 30px rgba(255, 111, 60, 0.2);
+  }
+  
+  .circular-text-path {
+    animation: rotateText 20s linear infinite;
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes rotateText {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.floating {
+  animation: float 5s ease-in-out infinite;
+}
