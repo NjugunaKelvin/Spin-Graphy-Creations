@@ -1,12 +1,11 @@
-// components/Landing.tsx
 'use client';
 
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const Landing = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [text, setText] = useState('DESIGN • INNOVATION • CREATIVITY •');
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -17,162 +16,197 @@ const Landing = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Calculate tilt based on mouse position
-  const calculateTilt = (elementX: number, elementY: number) => {
-    const tiltX = (mousePosition.y - elementY) / 20;
-    const tiltY = (mousePosition.x - elementX) / 20;
-    return { tiltX, tiltY };
-  };
-
   return (
-    <div className="min-h-screen overflow-hidden relative">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-[#ff6f3c] opacity-10"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              width: `${Math.random() * 300 + 50}px`,
-              height: `${Math.random() * 300 + 50}px`,
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 360],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-        ))}
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 overflow-hidden relative">
+      
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '60px 60px'
+        }} />
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 container mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-screen">
-        {/* Circular text */}
-        <div className="relative w-64 h-64 mb-16">
-          <svg viewBox="0 0 100 100" className="w-full h-full circular-text-path">
-            <defs>
-              <path
-                id="circlePath"
-                d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-              />
-            </defs>
-            <text className="text-[5px] fill-[#ff6f3c] font-bold">
-              <textPath href="#circlePath">
-                DESIGN • INNOVATION • CREATIVITY • EXCELLENCE •
-              </textPath>
-            </text>
-          </svg>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              className="w-32 h-32 rounded-full border-4 border-[#ff6f3c] border-opacity-30"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            />
-          </div>
-        </div>
+      {/* Hero Image Background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/60 to-gray-900/80" />
+        <Image
+          src="/images/bg.jpg" // Replace with your actual hero image path
+          alt="Creative Studio"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
 
-        {/* Hero text with pressure effect */}
-        <motion.h1 
-          className="text-5xl md:text-7xl font-bold text-center mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+      {/* Floating Abstract Shapes */}
+      <div className="absolute inset-0 z-1">
+        <motion.div
+          className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.2, 0.4],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center min-h-screen text-center">
+        
+        {/* Logo/Brand Mark */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
+          className="mb-12"
         >
-          We Craft <span className="text-gradient">Digital</span>
-          <br />
-          <motion.span
-            className="inline-block"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            Experiences
-          </motion.span>
-        </motion.h1>
+          <div className="w-24 h-24 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl">
+            <span className="text-2xl font-bold text-white">SC</span>
+          </div>
+        </motion.div>
 
-        <motion.p 
-          className="text-xl text-gray-300 text-center max-w-2xl mb-12"
-          initial={{ opacity: 0, y: 20 }}
+        {/* Main Headline */}
+        <motion.h1 
+          className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Transforming visions into stunning visual experiences through innovative design, 
-          branding, and motion graphics.
-        </motion.p>
+          Spingraphy
+          <br />
+          <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            Creations
+          </span>
+        </motion.h1>
 
+        {/* Animated Typing Text */}
         <motion.div
-          className="flex gap-6"
+          className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-8 min-h-[2.5rem]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <button className="px-8 py-3 bg-[#ff6f3c] rounded-full font-medium hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105">
-            View Our Work
-          </button>
-          <button className="px-8 py-3 border border-white border-opacity-20 rounded-full font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-300">
-            Learn More
-          </button>
+          <span className="text-gray-400">We specialize in </span>
+          <span className="text-white font-semibold">
+            Graphic Design • Brand Identity • Video Reels • Voice-overs
+          </span>
         </motion.div>
 
-        {/* Floating elements */}
-        <motion.div 
-          className="absolute top-1/4 left-1/4 w-10 h-10 rounded-full bg-[#ff6f3c] opacity-20"
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 5, repeat: Infinity }}
-        />
-        <motion.div 
-          className="absolute bottom-1/3 right-1/4 w-6 h-6 rounded-full bg-white opacity-10"
-          animate={{ y: [0, 15, 0] }}
-          transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-        />
-        <motion.div 
-          className="absolute top-2/3 left-1/3 w-8 h-8 rounded-full bg-[#ff6f3c] opacity-30"
-          animate={{ y: [0, -15, 0] }}
-          transition={{ duration: 6, repeat: Infinity, delay: 1 }}
-        />
+        {/* Tagline */}
+        <motion.p 
+          className="text-lg md:text-xl text-gray-400 max-w-2xl mb-12 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          Transforming your ideas into captivating visuals, compelling stories, 
+          and memorable brand experiences that connect with your audience.
+        </motion.p>
 
-        {/* Text pressure effect */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+        {/* CTA Buttons */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+        >
+          <motion.button 
+            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-2xl font-semibold text-lg shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get a Quote
+          </motion.button>
+          <motion.button 
+            className="px-8 py-4 border border-white/20 text-white rounded-2xl font-semibold text-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            View Portfolio
+          </motion.button>
+        </motion.div>
+
+        {/* Stats Grid */}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+        >
           {[
-            { value: '150+', label: 'Projects Completed' },
-            { value: '50+', label: 'Happy Clients' },
-            { value: '12+', label: 'Awards Won' },
-            { value: '5+', label: 'Years Experience' },
+            { number: '250+', label: 'Projects' },
+            { number: '98%', label: 'Satisfaction' },
+            { number: '50+', label: 'Clients' },
+            { number: '5★', label: 'Rating' },
           ].map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center p-6 rounded-2xl bg-black bg-opacity-20 backdrop-blur-sm border border-white border-opacity-10"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+              className="text-center p-6 rounded-2xl backdrop-blur-sm bg-white/5 border border-white/10"
               whileHover={{ 
                 scale: 1.05,
-                backgroundColor: 'rgba(255, 111, 60, 0.1)',
-                transition: { duration: 0.2 }
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
               }}
+              transition={{ duration: 0.2 }}
             >
-              <div className="text-3xl font-bold text-gradient mb-2">{stat.value}</div>
+              <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
+                {stat.number}
+              </div>
               <div className="text-gray-400 text-sm">{stat.label}</div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+        >
+          <motion.div
+            className="flex flex-col items-center text-gray-400"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <span className="text-sm mb-2">Scroll to explore</span>
+            <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+              <motion.div
+                className="w-1 h-3 bg-gray-400 rounded-full mt-2"
+                animate={{ y: [0, 16, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* Mouse follower gradient light */}
+      {/* Mouse Follow Light */}
       <div 
-        className="fixed pointer-events-none z-0 -translate-x-1/2 -translate-y-1/2 opacity-20"
+        className="fixed pointer-events-none z-0 -translate-x-1/2 -translate-y-1/2 opacity-30"
         style={{
           left: `${mousePosition.x}px`,
           top: `${mousePosition.y}px`,
-          width: '400px',
-          height: '400px',
-          background: 'radial-gradient(circle, rgba(255,111,60,0.4) 0%, rgba(0,0,0,0) 70%)',
-          transition: 'left 0.1s ease-out, top 0.1s ease-out',
+          width: '300px',
+          height: '300px',
+          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, rgba(0, 0, 0, 0) 70%)',
+          transition: 'left 0.15s ease-out, top 0.15s ease-out',
         }}
       />
     </div>
