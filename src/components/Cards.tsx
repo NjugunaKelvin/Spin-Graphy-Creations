@@ -79,10 +79,10 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
     };
   }, [calculateDimensions]);
 
-  // Use scroll within the container
+  // Use scroll within the container with more lenient offsets
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"]
+    offset: ["start end", "end start"] // More lenient - starts when section enters viewport
   });
 
   // Apply spring for smooth animation
@@ -92,7 +92,7 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
     restDelta: 0.001
   });
 
-  // Calculate horizontal translation
+  // Calculate horizontal translation - only translate when in viewport
   const scrollRange = Math.max(0, cardsWidth - containerWidth);
   const xTransform = useTransform(
     smoothProgress, 
@@ -100,20 +100,17 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
     [0, -scrollRange]
   );
 
-  // Subtle parallax for images
-  const imageYTransform = useTransform(smoothProgress, [0, 1], [0, 30]);
-
   return (
     <section
       ref={containerRef}
       className="relative w-full overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
       style={{
-        // Set height to accommodate the horizontal scroll
-        height: `calc(100vh + ${scrollRange > 0 ? '100vh' : '0px'})`,
+        // Fixed height - no extra space
+        height: '100vh',
       }}
     >
-      {/* Sticky container that holds the horizontal scroll */}
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+      {/* Sticky container */}
+      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
@@ -144,7 +141,7 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
         {/* Horizontal scrolling cards container */}
         <motion.div
           ref={cardsContainerRef}
-          className="flex items-center gap-6 px-4 md:px-8 lg:px-12"
+          className="flex items-center gap-8 px-6 md:px-12 lg:px-16"
           style={{ x: xTransform }}
         >
           {cards.map((card, index) => (
@@ -152,9 +149,9 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
               key={index}
               className="flex-shrink-0 relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer"
               style={{
-                width: 'clamp(300px, 40vw, 400px)',
-                height: '60vh',
-                minHeight: '400px',
+                width: 'clamp(300px, 50vw, 500px)',
+                height: '70vh',
+                minHeight: '500px',
               }}
               whileHover={{ 
                 scale: 1.03, 
@@ -171,17 +168,16 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              {/* Background Image with subtle parallax */}
-              <motion.div
+              {/* Background Image */}
+              <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ 
                   backgroundImage: `url(${card.image})`,
-                  y: imageYTransform
                 }}
               />
               
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
               
               {/* Animated Accent Border on hover */}
               <div 
@@ -203,16 +199,16 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
                     className="w-12 h-1 mb-4 rounded-full"
                     style={{ backgroundColor: card.accentColor }}
                   />
-                  <h3 className="text-2xl md:text-3xl font-bold mb-2 tracking-tight">
+                  <h3 className="text-2xl md:text-4xl font-bold mb-2 tracking-tight">
                     {card.title}
                   </h3>
-                  <p className="text-base md:text-lg opacity-90 font-light mb-6 leading-relaxed">
+                  <p className="text-base md:text-xl opacity-90 font-light mb-4 leading-relaxed">
                     {card.subtitle}
                   </p>
                   
                   {/* CTA Button */}
                   <motion.button
-                    className="px-6 py-3 rounded-full font-medium text-sm backdrop-blur-sm border transition-all duration-300"
+                    className="px-6 py-2 rounded-full font-medium text-sm backdrop-blur-sm border transition-all duration-300"
                     style={{
                       backgroundColor: `${card.accentColor}20`,
                       borderColor: card.accentColor,
@@ -236,16 +232,18 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
           ))}
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div 
-          className="absolute bottom-8 right-8 text-white text-sm opacity-70 hidden md:block"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.7 }}
-          transition={{ delay: 1 }}
-          viewport={{ once: true }}
-        >
-          ← Scroll horizontally →
-        </motion.div>
+        {/* Scroll indicator - only show when there's horizontal scroll available */}
+        {scrollRange > 0 && (
+          <motion.div 
+            className="absolute bottom-8 right-8 text-white text-sm opacity-70 hidden md:block"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 0.7 }}
+            transition={{ delay: 1 }}
+            viewport={{ once: true }}
+          >
+            Scroll to explore →
+          </motion.div>
+        )}
       </div>
     </section>
   );
