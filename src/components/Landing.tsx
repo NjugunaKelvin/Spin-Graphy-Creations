@@ -35,7 +35,7 @@ const Landing = () => {
         
         {/* Large Center Image */}
         <motion.div
-          className="absolute top-1/4 right-1/4 w-64 h-96 md:w-80 md:h-[500px] rounded-xl overflow-hidden shadow-2xl"
+          className="absolute top-1/4 right-1/2 w-64 h-96 md:w-80 md:h-[500px] rounded-xl overflow-hidden shadow-2xl"
           initial={{ opacity: 0, scale: 0.8, x: 100 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
@@ -51,7 +51,7 @@ const Landing = () => {
 
         {/* Top Right Image */}
         <motion.div
-          className="absolute top-10 right-10 w-48 h-64 md:w-60 md:h-80 rounded-xl overflow-hidden shadow-2xl"
+          className="absolute top-20 right-10 w-48 h-64 md:w-60 md:h-80 rounded-xl overflow-hidden shadow-2xl"
           initial={{ opacity: 0, y: -100, x: 50 }}
           animate={{ opacity: 1, y: 0, x: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
@@ -126,7 +126,7 @@ const Landing = () => {
 
         {/* Top Small Image */}
         <motion.div
-          className="absolute top-20 right-48 w-36 h-44 md:w-44 md:h-56 rounded-lg overflow-hidden shadow-xl"
+          className="absolute top-30 right-68 w-36 h-44 md:w-44 md:h-56 rounded-lg overflow-hidden shadow-xl"
           initial={{ opacity: 0, scale: 0.5, y: -50 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.3 }}
@@ -241,7 +241,7 @@ const Landing = () => {
             className="mb-8"
           >
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Bold <span className="text-gray-300">Ideas</span> Beautifully
+              Bold <span className="text-gray-300">Ideas,</span> Beautifully
               <span className="text-gray-400"> Made</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full" />
@@ -305,7 +305,7 @@ const Landing = () => {
                      animation: 'gradientShift 3s ease infinite'
                    }} />
               <div className="absolute inset-0 bg-gray-900/80 rounded-lg backdrop-blur-sm" />
-              <span className="relative z-10">START YOUR PROJECT</span>
+              <span className="relative z-10">TALK TO US</span>
             </motion.button>
             
             <motion.button
@@ -319,7 +319,7 @@ const Landing = () => {
                      animation: 'gradientShift 3s ease infinite'
                    }} />
               <div className="absolute inset-0 bg-transparent rounded-lg backdrop-blur-sm" />
-              <span className="relative z-10">VIEW PORTFOLIO</span>
+              <span className="relative z-10">OUR PORTFOLIO</span>
             </motion.button>
           </motion.div>
 
