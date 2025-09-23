@@ -1,0 +1,225 @@
+'use client';
+
+import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+
+interface Card {
+  image: string;
+  title: string;
+  subtitle: string;
+  accentColor?: string;
+}
+
+interface CardsProps {
+  cards?: Card[];
+}
+
+const defaultCards: Card[] = [
+  { 
+    image: "/images/card1.jpg", 
+    title: "Brand Identity", 
+    subtitle: "Logo design, visual systems, and brand guidelines",
+    accentColor: "#FF6B6B"
+  },
+  { 
+    image: "/images/card2.jpg", 
+    title: "Motion Graphics", 
+    subtitle: "Animated logos, explainer videos, and social media reels",
+    accentColor: "#4ECDC4"
+  },
+  { 
+    image: "/images/card3.jpg", 
+    title: "Voice Overs", 
+    subtitle: "Professional narration for ads, videos, and presentations",
+    accentColor: "#45B7D1"
+  },
+  { 
+    image: "/images/card4.jpg", 
+    title: "UI/UX Design", 
+    subtitle: "User-centered digital experiences and interfaces",
+    accentColor: "#96CEB4"
+  },
+  { 
+    image: "/images/print-design.jpg", 
+    title: "Print & Packaging", 
+    subtitle: "Business cards, brochures, and product packaging",
+    accentColor: "#FFEAA7"
+  },
+  { 
+    image: "/images/creative-strategy.jpg", 
+    title: "Creative Strategy", 
+    subtitle: "End-to-end creative solutions for your brand",
+    accentColor: "#DDA0DD"
+  },
+];
+
+const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const [totalScrollWidth, setTotalScrollWidth] = useState(0);
+
+  const calculateDimensions = useCallback(() => {
+    if (cardsContainerRef.current && containerRef.current) {
+      const containerWidth = cardsContainerRef.current.scrollWidth;
+      const viewportWidth = containerRef.current.clientWidth;
+      setTotalScrollWidth(Math.max(0, containerWidth - viewportWidth));
+    }
+  }, []);
+
+  useEffect(() => {
+    calculateDimensions();
+    window.addEventListener('resize', calculateDimensions);
+
+    return () => {
+      window.removeEventListener('resize', calculateDimensions);
+    };
+  }, [calculateDimensions]);
+
+  // Smooth scroll with spring physics
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Apply spring smoothing to the scroll progress
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const xTransform = useTransform(smoothProgress, [0, 1], [0, -totalScrollWidth]);
+
+  // Parallax effect for background images
+  const imageYTransform = useTransform(smoothProgress, [0, 1], [0, 50]);
+
+  return (
+    <section
+      ref={containerRef}
+      style={{
+        height: `calc(100vh + ${totalScrollWidth}px)`,
+      }}
+      className="relative w-full bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+    >
+      {/* Animated background elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-500"></div>
+      </div>
+
+      <motion.div
+        ref={cardsContainerRef}
+        className="flex items-center h-screen gap-6 px-4 md:px-8 lg:px-12 sticky top-0"
+        style={{ x: xTransform }}
+      >
+        {cards.map((card, index) => (
+          <motion.div
+            key={index}
+            className="flex-shrink-0 relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer"
+            style={{
+              width: 'clamp(300px, 50vw, 500px)',
+              height: '70vh',
+              minHeight: '500px',
+            }}
+            whileHover={{ 
+              scale: 1.03, 
+              y: -10,
+              transition: { 
+                type: "spring", 
+                stiffness: 300, 
+                damping: 20 
+              } 
+            }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {/* Background Image with Parallax */}
+            <motion.div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ 
+                backgroundImage: `url(${card.image})`,
+                y: imageYTransform
+              }}
+            />
+            
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+            
+            {/* Animated Accent Border */}
+            <div 
+              className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"
+              style={{
+                boxShadow: `0 0 0 2px ${card.accentColor}40, 0 0 30px ${card.accentColor}20`,
+              }}
+            />
+            
+            {/* Content */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white z-10">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div 
+                  className="w-12 h-1 mb-4 rounded-full"
+                  style={{ backgroundColor: card.accentColor }}
+                />
+                <h3 className="text-2xl md:text-4xl font-bold mb-2 tracking-tight">
+                  {card.title}
+                </h3>
+                <p className="text-base md:text-xl opacity-90 font-light mb-4 leading-relaxed">
+                  {card.subtitle}
+                </p>
+                
+                {/* CTA Button */}
+                <motion.button
+                  className="px-6 py-2 rounded-full font-medium text-sm backdrop-blur-sm border transition-all duration-300"
+                  style={{
+                    backgroundColor: `${card.accentColor}20`,
+                    borderColor: card.accentColor,
+                    color: card.accentColor
+                  }}
+                  whileHover={{
+                    backgroundColor: card.accentColor,
+                    color: 'white',
+                    scale: 1.05
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Explore Project
+                </motion.button>
+              </motion.div>
+            </div>
+
+            {/* Hover Effect Layer */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500" />
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+      >
+        <motion.div
+          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <motion.div
+            className="w-1 h-3 bg-white/50 rounded-full mt-2"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+        </motion.div>
+        <p className="text-white/60 text-xs mt-2 text-center">Scroll to explore</p>
+      </motion.div>
+    </section>
+  );
+};
+
+export default Cards;
