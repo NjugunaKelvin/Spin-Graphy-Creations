@@ -198,26 +198,6 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
         ))}
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        <motion.div
-          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <motion.div
-            className="w-1 h-3 bg-white/50 rounded-full mt-2"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </motion.div>
-        <p className="text-white/60 text-xs mt-2 text-center">Scroll to explore</p>
-      </motion.div>
     </section>
   );
 };

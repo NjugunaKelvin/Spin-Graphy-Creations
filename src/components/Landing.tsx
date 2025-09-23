@@ -19,31 +19,181 @@ const Landing = () => {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-hidden relative" style={{ backgroundColor: '#2a0b36' }}>
+    <div className="min-h-screen overflow-hidden relative" style={{ backgroundColor: '#0f0f1f' }}>
       
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(120, 40, 200, 0.2) 0%, transparent 50%),
-                           radial-gradient(circle at 75% 75%, rgba(200, 40, 120, 0.2) 0%, transparent 50%)`,
+          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(120, 40, 200, 0.1) 0%, transparent 50%),
+                           radial-gradient(circle at 75% 75%, rgba(200, 40, 120, 0.1) 0%, transparent 50%)`,
           backgroundSize: '50vw 50vh',
         }} />
       </div>
 
-      {/* Strategic Image Placement - Not Full Cover */}
-      <div className="absolute top-0 right-0 w-full md:w-1/2 h-1/3 md:h-full opacity-20 md:opacity-30">
-        <Image
-          src="/images/bg.jpg"
-          alt="Creative Studio"
-          fill
-          className="object-cover object-left md:object-center"
-          priority
-          quality={90}
-        />
-        <div className="absolute inset-0 bg-gradient-to-l from-#2a0b36 via-transparent to-transparent" />
+      {/* Floating Images Container - Right Side Only */}
+      <div className="absolute top-0 right-0 w-full md:w-1/2 h-full overflow-hidden">
+        
+        {/* Large Center Image */}
+        <motion.div
+          className="absolute top-1/4 right-1/4 w-64 h-96 md:w-80 md:h-[500px] rounded-xl overflow-hidden shadow-2xl"
+          initial={{ opacity: 0, scale: 0.8, x: 100 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        >
+          <Image
+            src="/images/work1.jpg"
+            alt="Project 1"
+            fill
+            className="object-cover"
+            priority
+          />
+        </motion.div>
+
+        {/* Top Right Image */}
+        <motion.div
+          className="absolute top-10 right-10 w-48 h-64 md:w-60 md:h-80 rounded-xl overflow-hidden shadow-2xl"
+          initial={{ opacity: 0, y: -100, x: 50 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          transition={{ duration: 1, delay: 0.8 }}
+        >
+          <Image
+            src="/images/work2.jpg"
+            alt="Project 2"
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Bottom Right Image */}
+        <motion.div
+          className="absolute bottom-20 right-20 w-56 h-72 md:w-72 md:h-96 rounded-xl overflow-hidden shadow-2xl"
+          initial={{ opacity: 0, y: 100, x: 50 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          transition={{ duration: 1, delay: 1.1 }}
+        >
+          <Image
+            src="/images/work3.jpg"
+            alt="Project 3"
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Middle Right Image */}
+        <motion.div
+          className="absolute top-1/2 right-40 w-52 h-68 md:w-64 md:h-80 rounded-xl overflow-hidden shadow-2xl"
+          initial={{ opacity: 0, rotateY: 90, x: 100 }}
+          animate={{ opacity: 1, rotateY: 0, x: 0 }}
+          transition={{ duration: 1, delay: 1.4 }}
+        >
+          <Image
+            src="/images/work4.jpg"
+            alt="Project 4"
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Center Small Image */}
+        <motion.div
+          className="absolute top-1/3 right-1/3 w-40 h-52 md:w-52 md:h-64 rounded-lg overflow-hidden shadow-xl"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 1.7 }}
+        >
+          <Image
+            src="/images/work5.jpg"
+            alt="Project 5"
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Bottom Center Image */}
+        <motion.div
+          className="absolute bottom-32 right-32 w-44 h-56 md:w-56 md:h-72 rounded-lg overflow-hidden shadow-xl"
+          initial={{ opacity: 0, y: 80, x: 80 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          transition={{ duration: 1, delay: 2.0 }}
+        >
+          <Image
+            src="/images/work6.jpg"
+            alt="Project 6"
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Top Small Image */}
+        <motion.div
+          className="absolute top-20 right-48 w-36 h-44 md:w-44 md:h-56 rounded-lg overflow-hidden shadow-xl"
+          initial={{ opacity: 0, scale: 0.5, y: -50 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 2.3 }}
+        >
+          <Image
+            src="/images/work7.jpg"
+            alt="Project 7"
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Far Right Image */}
+        <motion.div
+          className="absolute top-40 right-5 w-32 h-40 md:w-40 md:h-52 rounded-lg overflow-hidden shadow-lg"
+          initial={{ opacity: 0, x: 150 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 2.6 }}
+        >
+          <Image
+            src="/images/work8.jpg"
+            alt="Project 8"
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Floating Small Image */}
+        <motion.div
+          className="absolute bottom-40 right-60 w-28 h-36 md:w-36 md:h-44 rounded-lg overflow-hidden shadow-lg"
+          initial={{ opacity: 0, scale: 0.3 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 2.9 }}
+        >
+          <Image
+            src="/images/work9.jpg"
+            alt="Project 9"
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Additional Small Image */}
+        <motion.div
+          className="absolute top-60 right-16 w-24 h-32 md:w-32 md:h-40 rounded-lg overflow-hidden shadow-lg"
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 3.2 }}
+        >
+          <Image
+            src="/images/work10.jpg"
+            alt="Project 10"
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Right Edge Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-l from-#0f0f1f via-transparent to-transparent opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-#0f0f1f via-transparent to-transparent opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-#0f0f1f via-transparent to-#0f0f1f opacity-20" />
+        
+        {/* Left Edge Sharp Cutoff */}
+        <div className="absolute left-0 inset-y-0 w-20 bg-gradient-to-r from-#0f0f1f to-transparent opacity-90" />
       </div>
 
-      {/* Main Content */}
+      {/* Main Content - Left Side */}
       <div className="relative z-10 container mx-auto px-6 py-12 md:py-24 min-h-screen flex items-center">
         <div className="w-full md:w-2/3 lg:w-1/2">
           
@@ -54,7 +204,7 @@ const Landing = () => {
             transition={{ duration: 0.8 }}
             className="mb-6"
           >
-            <span className="text-purple-300 font-semibold text-lg md:text-xl tracking-widest uppercase">
+            <span className="text-gray-300 font-semibold text-lg md:text-xl tracking-widest uppercase">
               Premium Creative Agency
             </span>
           </motion.div>
@@ -67,7 +217,7 @@ const Landing = () => {
             className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight md:leading-none mb-6"
             style={{ 
               color: '#ffffff',
-              textShadow: '2px 2px 4px rgba(0,0,0,0.3), 0 0 30px rgba(255,255,255,0.1)',
+              textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
               fontFamily: 'Arial Black, sans-serif'
             }}
           >
@@ -77,7 +227,7 @@ const Landing = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="text-purple-200"
+              className="text-gray-300"
             >
               CREATIONS
             </motion.span>
@@ -91,10 +241,10 @@ const Landing = () => {
             className="mb-8"
           >
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Where <span className="text-purple-300">Vision</span> Meets 
-              <span className="text-pink-300"> Execution</span>
+              Bold <span className="text-gray-300">Ideas</span> Beautifully
+              <span className="text-gray-400"> Made</span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full" />
+            <div className="w-20 h-1 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full" />
           </motion.div>
 
           {/* Description */}
@@ -102,7 +252,7 @@ const Landing = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl"
+            className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 max-w-2xl"
             style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}
           >
             We are a premier creative agency specializing in transformative brand experiences, 
@@ -117,10 +267,10 @@ const Landing = () => {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
           >
             {[
-              { title: "BRANDING", color: "from-purple-400 to-purple-600" },
-              { title: "DESIGN", color: "from-pink-400 to-pink-600" },
-              { title: "MOTION", color: "from-blue-400 to-blue-600" },
-              { title: "AUDIO", color: "from-green-400 to-green-600" },
+              { title: "BRANDING", color: "from-gray-600 to-gray-800" },
+              { title: "DESIGN", color: "from-gray-500 to-gray-700" },
+              { title: "MOTION", color: "from-gray-400 to-gray-600" },
+              { title: "AUDIO", color: "from-gray-300 to-gray-500" },
             ].map((service, index) => (
               <motion.div
                 key={index}
@@ -128,7 +278,7 @@ const Landing = () => {
                 whileTap={{ scale: 0.95 }}
                 className="group cursor-pointer"
               >
-                <div className={`bg-gradient-to-r ${service.color} rounded-lg p-4 text-center transition-all duration-300 group-hover:shadow-2xl`}>
+                <div className={`bg-gradient-to-r ${service.color} rounded-lg p-4 text-center transition-all duration-300 group-hover:shadow-xl border border-gray-700`}>
                   <div className="text-white font-bold text-sm md:text-base tracking-widest">
                     {service.title}
                   </div>
@@ -147,17 +297,29 @@ const Landing = () => {
             <motion.button
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 bg-white text-#2a0b36 font-bold text-lg rounded-lg hover:bg-gray-100 transition-colors duration-300 shadow-2xl"
+              className="relative px-8 py-4 bg-transparent text-white font-bold text-lg rounded-lg overflow-hidden group border-2 border-transparent"
             >
-              START YOUR PROJECT
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-600 via-gray-400 to-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" 
+                   style={{ 
+                     backgroundSize: '200% 100%',
+                     animation: 'gradientShift 3s ease infinite'
+                   }} />
+              <div className="absolute inset-0 bg-gray-900/80 rounded-lg backdrop-blur-sm" />
+              <span className="relative z-10">START YOUR PROJECT</span>
             </motion.button>
             
             <motion.button
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 border-2 border-white text-white font-bold text-lg rounded-lg hover:bg-white hover:text-#2a0b36 transition-all duration-300"
+              className="relative px-8 py-4 bg-transparent text-white font-bold text-lg rounded-lg overflow-hidden group border-2 border-gray-400"
             >
-              VIEW PORTFOLIO
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-400 via-gray-200 to-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"
+                   style={{ 
+                     backgroundSize: '200% 100%',
+                     animation: 'gradientShift 3s ease infinite'
+                   }} />
+              <div className="absolute inset-0 bg-transparent rounded-lg backdrop-blur-sm" />
+              <span className="relative z-10">VIEW PORTFOLIO</span>
             </motion.button>
           </motion.div>
 
@@ -166,7 +328,7 @@ const Landing = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.5 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-white/20 pt-8"
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-gray-600 pt-8"
           >
             {[
               { number: '250+', label: 'Projects Completed' },
@@ -184,7 +346,7 @@ const Landing = () => {
                 >
                   {stat.number}
                 </motion.div>
-                <div className="text-purple-200 text-sm font-medium">
+                <div className="text-gray-300 text-sm font-medium">
                   {stat.label}
                 </div>
               </div>
@@ -197,10 +359,10 @@ const Landing = () => {
       {!isMobile && (
         <>
           <motion.div
-            className="absolute top-1/4 left-1/4 w-4 h-4 bg-purple-400 rounded-full"
+            className="absolute top-1/4 left-1/4 w-4 h-4 bg-gray-400 rounded-full"
             animate={{
               y: [0, -20, 0],
-              opacity: [0.5, 1, 0.5],
+              opacity: [0.3, 0.7, 0.3],
             }}
             transition={{
               duration: 3,
@@ -209,10 +371,10 @@ const Landing = () => {
             }}
           />
           <motion.div
-            className="absolute top-1/3 right-1/3 w-3 h-3 bg-pink-400 rounded-full"
+            className="absolute top-1/3 right-1/3 w-3 h-3 bg-gray-300 rounded-full"
             animate={{
               y: [0, 15, 0],
-              opacity: [0.3, 0.8, 0.3],
+              opacity: [0.2, 0.6, 0.2],
             }}
             transition={{
               duration: 4,
@@ -224,28 +386,15 @@ const Landing = () => {
         </>
       )}
 
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 2 }}
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="text-white text-center"
-        >
-          <div className="text-sm mb-2">SCROLL TO EXPLORE</div>
-          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center mx-auto">
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-3 bg-white rounded-full mt-2"
-            />
-          </div>
-        </motion.div>
-      </motion.div>
+   
+      {/* CSS for gradient animation */}
+      <style jsx>{`
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
     </div>
   );
 };
