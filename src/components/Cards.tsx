@@ -232,7 +232,6 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
           ))}
         </motion.div>
 
-      
       </div>
     </section>
   );
