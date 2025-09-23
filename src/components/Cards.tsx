@@ -232,18 +232,7 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
           ))}
         </motion.div>
 
-        {/* Scroll indicator - only show when there's horizontal scroll available */}
-        {scrollRange > 0 && (
-          <motion.div 
-            className="absolute bottom-8 right-8 text-white text-sm opacity-70 hidden md:block"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.7 }}
-            transition={{ delay: 1 }}
-            viewport={{ once: true }}
-          >
-            Scroll to explore →
-          </motion.div>
-        )}
+      
       </div>
     </section>
   );
