@@ -35,7 +35,7 @@ const defaultCards: Card[] = [
   },
   { 
     image: "/images/card4.jpg", 
-    title: "UI/UX Design", 
+    title: "Graphics Design", 
     subtitle: "User-centered digital experiences and interfaces",
     accentColor: "#96CEB4"
   },
