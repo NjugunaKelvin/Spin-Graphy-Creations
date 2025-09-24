@@ -40,13 +40,13 @@ const defaultCards: Card[] = [
     accentColor: "#96CEB4"
   },
   { 
-    image: "/images/print-design.jpg", 
+    image: "/images/card5.jpg", 
     title: "Print & Packaging", 
     subtitle: "Business cards, brochures, and product packaging",
     accentColor: "#FFEAA7"
   },
   { 
-    image: "/images/creative-strategy.jpg", 
+    image: "/images/card6.jpg", 
     title: "Creative Strategy", 
     subtitle: "End-to-end creative solutions for your brand",
     accentColor: "#DDA0DD"
