@@ -39,7 +39,7 @@ const PricingPage = () => {
       id: 'starter',
       name: 'Starter',
       description: 'Perfect for small projects and startups',
-      price: '$499',
+      price: 'Ksh 20,000',
       period: '/project',
       features: [
         '1-2 Design Concepts',
@@ -56,7 +56,7 @@ const PricingPage = () => {
       id: 'professional',
       name: 'Professional',
       description: 'Ideal for growing businesses',
-      price: '$899',
+      price: 'Ksh 69,999',
       period: '/project',
       features: [
         '3-4 Design Concepts',
@@ -75,7 +75,7 @@ const PricingPage = () => {
       id: 'enterprise',
       name: 'Enterprise',
       description: 'For large-scale brand transformations',
-      price: '$1,499',
+      price: 'Ksh, 149,999',
       period: '/project',
       features: [
         '5+ Design Concepts',
@@ -97,7 +97,7 @@ const PricingPage = () => {
       id: 'graphics',
       name: 'Graphics Design',
       description: 'Custom graphics for digital and print media',
-      basePrice: '$299',
+      basePrice: 'Ksh 29,999',
       deliveryTime: '3-5 days',
       revisions: '3 rounds',
       features: [
@@ -117,7 +117,7 @@ const PricingPage = () => {
       id: 'branding',
       name: 'Brand Identity',
       description: 'Complete brand system development',
-      basePrice: '$799',
+      basePrice: 'Ksh 49,999',
       deliveryTime: '7-10 days',
       revisions: 'Unlimited',
       features: [
@@ -137,7 +137,7 @@ const PricingPage = () => {
       id: 'voice',
       name: 'Voice Overs',
       description: 'Professional voice recording services',
-      basePrice: '$149',
+      basePrice: 'Ksh 45,000',
       deliveryTime: '2-3 days',
       revisions: '2 rounds',
       features: [
@@ -157,7 +157,7 @@ const PricingPage = () => {
       id: 'motion',
       name: 'Motion Graphics',
       description: 'Animated videos and visual effects',
-      basePrice: '$599',
+      basePrice: 'Ksh 49,999',
       deliveryTime: '5-7 days',
       revisions: '4 rounds',
       features: [
@@ -168,9 +168,9 @@ const PricingPage = () => {
         'Source Files'
       ],
       addons: [
-        { name: '3D Animation', price: '+$399', description: 'Advanced 3D modeling' },
-        { name: 'Character Design', price: '+$299', description: 'Custom character creation' },
-        { name: 'VR/AR Ready', price: '+$499', description: 'Immersive experience optimization' }
+        { name: '3D Animation', price: '+Ksh 15,000', description: 'Advanced 3D modeling' },
+        { name: 'Character Design', price: '+Ksh 30,000', description: 'Custom character creation' },
+        { name: 'VR/AR Ready', price: '+Ksh 50,000', description: 'Immersive experience optimization' }
       ]
     }
   ]
