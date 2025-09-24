@@ -255,8 +255,8 @@ const Landing = () => {
             className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 max-w-2xl"
             style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}
           >
-            We are a premier creative agency specializing in transformative brand experiences, 
-            cutting-edge visual design, and compelling digital storytelling that drives results.
+            We help brands stand out with thoughtful design, motion graphics, 
+            and voice overs, creating visuals and stories that actually connect and get results.
           </motion.p>
 
           {/* Services Grid */}

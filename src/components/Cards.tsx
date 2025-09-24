@@ -82,7 +82,7 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
   // Use scroll within the container with more lenient offsets
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"] // More lenient - starts when section enters viewport
+    offset: ["start start", "end start"] // More lenient - starts when section enters viewport
   });
 
   // Apply spring for smooth animation
@@ -141,7 +141,7 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
         {/* Horizontal scrolling cards container */}
         <motion.div
           ref={cardsContainerRef}
-          className="flex items-center gap-8 px-6 md:px-12 lg:px-16"
+          className="flex items-center gap-8 px-16 md:px-12 lg:px-16"
           style={{ x: xTransform }}
         >
           {cards.map((card, index) => (
