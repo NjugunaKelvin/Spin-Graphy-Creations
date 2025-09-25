@@ -418,7 +418,6 @@ const PortfolioPage = () => {
             {/* Empty State */}
             {filteredItems.length === 0 && (
               <div className="text-center py-24">
-                <div className="text-7xl mb-6 opacity-50">🎨</div>
                 <h3 className="text-2xl font-bold text-white/80 mb-3">No projects found</h3>
                 <p className="text-white/60">We're working on new amazing projects in this category!</p>
               </div>
