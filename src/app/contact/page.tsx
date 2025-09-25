@@ -1,5 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client'
 import { useState } from 'react'
+import { JSX } from 'react/jsx-runtime'
 
 interface Service {
   id: string
