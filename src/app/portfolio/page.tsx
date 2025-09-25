@@ -369,7 +369,7 @@ const PortfolioPage = () => {
             {/* Company Stats */}
             <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
               <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Why Choose Us?
+                Why Choose SpinGraphy?
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center space-x-4 group">
@@ -396,7 +396,7 @@ const PortfolioPage = () => {
               <h3 className="text-lg font-bold text-white mb-3">Start Your Project</h3>
               <p className="text-white/70 text-sm mb-6 leading-relaxed">Ready to bring your vision to life?</p>
               <button className="w-full py-4 bg-white text-[#0f0f1f] rounded-xl font-bold hover:shadow-2xl hover:shadow-white/30 transition-all duration-500 transform hover:scale-105">
-                Get Quote
+                Talk to Us
               </button>
             </div>
           </div>
