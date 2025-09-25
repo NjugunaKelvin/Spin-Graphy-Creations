@@ -18,7 +18,7 @@ const PortfolioPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const slideIntervalRef = useRef<NodeJS.Timeout>();
+  const slideIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
   const categories = [
@@ -119,7 +119,7 @@ const PortfolioPage = () => {
         clearInterval(slideIntervalRef.current);
       }
     };
-  }, []);
+  }, [companySlides.length]);
 
   // Close modal on outside click
   useEffect(() => {
