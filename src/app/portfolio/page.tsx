@@ -138,7 +138,7 @@ const PortfolioPage = () => {
     if (isModalOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleEscapeKey);
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
+      document.body.style.overflow = 'hidden'; // Prevent scroling
     }
 
     return () => {
