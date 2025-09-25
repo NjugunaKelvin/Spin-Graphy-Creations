@@ -20,6 +20,8 @@ const Navbar = () => {
 
     const debouncedScroll = debounce(handleScroll, 10);
     window.addEventListener('scroll', debouncedScroll);
+    // Set initial state in case the page is already scrolled on mount
+    handleScroll();
     return () => window.removeEventListener('scroll', debouncedScroll);
   }, []);
 
@@ -95,7 +97,7 @@ const Navbar = () => {
       y: 30,
       transition: {
         duration: 0.2,
-        ease: "easeInOut"
+        ease: "easeInOut" as const
       }
     },
     open: {
@@ -106,7 +108,7 @@ const Navbar = () => {
         ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
-  };
+  } as const;
 
   const containerVariants = {
     hidden: { y: -100, opacity: 0 },
@@ -115,7 +117,7 @@ const Navbar = () => {
       opacity: 1,
       transition: {
         duration: 0.8,
-        ease: "easeInOut",
+        ease: "easeInOut" as const,
         delay: 0.2
       }
     }
@@ -124,9 +126,10 @@ const Navbar = () => {
   const hoverVariants = {
     hover: {
       scale: 1.05,
-      transition: { duration: 0.2, ease: "easeInOut" }
+      transition: { duration: 0.2, ease: "easeInOut" as const}
     },
-    tap: { scale: 0.95 }
+    tap: { scale: 0.95 },
+    transition: { duration: 0.1, ease: "easeOut" as const }
   };
 
   return (
@@ -135,6 +138,8 @@ const Navbar = () => {
         variants={containerVariants}
         initial="hidden"
         animate={isMounted ? "visible" : "hidden"}
+        role="navigation"
+        aria-label="Primary navigation"
         className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ${
           isScrolled 
             ? 'shadow-2xl bg-gray-900/95 backdrop-blur-xl border border-gray-800/50' 
@@ -218,6 +223,8 @@ const Navbar = () => {
             className="lg:hidden flex flex-col justify-center items-center w-10 h-10 relative focus:outline-none group"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             <span className={`bg-gradient-to-r from-orange-500 to-red-500 block transition-all duration-300 ease-out h-0.5 w-6 rounded-full ${
               isOpen ? 'rotate-45 translate-y-1.5' : '-translate-y-1'
@@ -243,6 +250,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
+            id="mobile-menu"
             className="fixed inset-0 z-40 lg:hidden"
             style={{
               background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(26,26,26,0.98) 100%)',
@@ -309,7 +317,7 @@ function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout;
+  let timeout: ReturnType<typeof setTimeout>;
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);

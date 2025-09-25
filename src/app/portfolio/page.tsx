@@ -21,13 +21,13 @@ const PortfolioPage = () => {
   const slideIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const categories = [
-    { id: 'all', label: 'All Works' },
-    { id: 'graphics', label: 'Graphics Design' },
-    { id: 'branding', label: 'Branding' },
-    { id: 'voice', label: 'Voice Overs' },
-    { id: 'motion', label: 'Motion Graphics' },
-  ];
+  const categories: { id: 'all' | 'graphics' | 'branding' | 'voice' | 'motion'; label: string }[] = [
+  { id: 'all', label: 'All Works' },
+  { id: 'graphics', label: 'Graphics Design' },
+  { id: 'branding', label: 'Branding' },
+  { id: 'voice', label: 'Voice Overs' },
+  { id: 'motion', label: 'Motion Graphics' },
+];
 
   const portfolioItems: PortfolioItem[] = [
     {
