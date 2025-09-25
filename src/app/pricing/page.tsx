@@ -108,9 +108,9 @@ const PricingPage = () => {
         'Color Variations'
       ],
       addons: [
-        { name: 'Social Media Pack', price: '+$99', description: '10+ platform-optimized graphics' },
-        { name: 'Animation', price: '+$199', description: 'Basic motion graphics' },
-        { name: '3D Elements', price: '+$299', description: '3D modeling and rendering' }
+        { name: 'Social Media Pack', price: '+Ksh 7,000', description: '10+ platform-optimized graphics' },
+        { name: 'Animation', price: '+Ksh 2,500', description: 'Basic motion graphics' },
+        { name: '3D Elements', price: 'Ksh 15,000', description: '3D modeling and rendering' }
       ]
     },
     {
@@ -128,9 +128,9 @@ const PricingPage = () => {
         'Stationery Design'
       ],
       addons: [
-        { name: 'Brand Strategy', price: '+$299', description: 'Market research and positioning' },
-        { name: 'Website Design', price: '+$499', description: 'Complete website mockups' },
-        { name: 'Packaging Design', price: '+$399', description: 'Product packaging concepts' }
+        { name: 'Brand Strategy', price: '+Ksh 7,000', description: 'Market research and positioning' },
+        { name: 'Website Design', price: '+Ksh 12,500', description: 'Complete website mockups' },
+        { name: 'Packaging Design', price: '+Ksh, 19,999', description: 'Product packaging concepts' }
       ]
     },
     {
@@ -148,9 +148,9 @@ const PricingPage = () => {
         '24hr Rush Delivery'
       ],
       addons: [
-        { name: 'Multiple Voices', price: '+$99', description: 'Additional voice actors' },
-        { name: 'Sound Design', price: '+$199', description: 'Full audio production' },
-        { name: 'Translation', price: '+$149', description: 'Multi-language versions' }
+        { name: 'Multiple Voices', price: '+Ksh 4,999', description: 'Additional voice actors' },
+        { name: 'Sound Design', price: '+Ksh 9,999', description: 'Full audio production' },
+        { name: 'Translation', price: '+Ksh 15,999', description: 'Multi-language versions' }
       ]
     },
     {

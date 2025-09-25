@@ -135,8 +135,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">Email</h3>
-                    <p className="text-white/70 text-sm">hello@creativestudio.com</p>
-                    <p className="text-white/70 text-sm">support@creativestudio.com</p>
+                    <p className="text-white/70 text-sm">spingraphy@creativestudio.com</p>
+                    <p className="text-white/70 text-sm">spingraphy@support.com</p>
                   </div>
                 </div>
 
@@ -146,8 +146,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">Phone</h3>
-                    <p className="text-white/70 text-sm">+1 (555) 123-4567</p>
-                    <p className="text-white/70 text-sm">+1 (555) 987-6543</p>
+                    <p className="text-white/70 text-sm">+254 722 000 000</p>
+                    <p className="text-white/70 text-sm">+254 723 000 000</p>
                   </div>
                 </div>
 
@@ -157,8 +157,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">Office</h3>
-                    <p className="text-white/70 text-sm">123 Creative Avenue</p>
-                    <p className="text-white/70 text-sm">San Francisco, CA 94102</p>
+                    <p className="text-white/70 text-sm">Remote</p>
+                    <p className="text-white/70 text-sm">Nairobi, Kenya</p>
                   </div>
                 </div>
 
