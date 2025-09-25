@@ -95,7 +95,7 @@ const ContactPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f1f] relative overflow-hidden">
+    <div className="min-h-screen bg-[#0f0f1f] relative overflow-hidden mt-8">
       {/* Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-3xl" />
