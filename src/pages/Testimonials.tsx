@@ -25,8 +25,8 @@ const Testimonials = () => {
       role: "Marketing Director",
       image: "/images/p1.jpg",
       videoThumbnail: "/thumbnails/1.png",
-      content: "SPingrapy didn't just design a website—they crafted an experience. The motion graphics and interactive elements they created have become the talk of our industry.",
-      projectType: "Interactive Website & Motion"
+      content: "SPingrapy didn't just design a logo—they crafted an experience. The motion graphics and interactive elements they created have become the talk of our industry.",
+      projectType: "Logo & Motion"
     },
     {
       id: 2,
