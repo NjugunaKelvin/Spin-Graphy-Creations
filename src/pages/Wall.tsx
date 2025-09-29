@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable prefer-const */
 'use client'
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
