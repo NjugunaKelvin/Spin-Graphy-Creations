@@ -196,7 +196,7 @@ const Testimonials = () => {
         <div className="relative">
           <div className="flex space-x-12 overflow-hidden py-4">
             <div className="flex space-x-12 animate-marquee whitespace-nowrap">
-              {['TechFlow', 'Nova Studios', 'Urban Brew', 'Lumina', 'NexTech', 'GreenLeaf'].map((logo, index) => (
+              {['Birthdays', 'Weddinga', 'Shabaha', 'Concerts', 'Corporates','Job Posters', 'Call for Applications', 'Graduations'].map((logo, index) => (
                 <div key={index} className="flex items-center">
                   <div className="text-white/40 text-lg font-bold hover:text-white/60 transition-colors duration-300">
                     {logo}
