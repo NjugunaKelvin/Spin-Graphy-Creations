@@ -18,23 +18,24 @@ const PortfolioPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const slideIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
   const categories: { id: 'all' | 'graphics' | 'branding' | 'voice' | 'motion'; label: string }[] = [
-  { id: 'all', label: 'All Works' },
-  { id: 'graphics', label: 'Graphics Design' },
-  { id: 'branding', label: 'Branding' },
-  { id: 'voice', label: 'Voice Overs' },
-  { id: 'motion', label: 'Motion Graphics' },
-];
+    { id: 'all', label: 'All Works' },
+    { id: 'graphics', label: 'Graphics Design' },
+    { id: 'branding', label: 'Branding' },
+    { id: 'voice', label: 'Voice Overs' },
+    { id: 'motion', label: 'Motion Graphics' },
+  ];
 
   const portfolioItems: PortfolioItem[] = [
     {
       id: 1,
       title: 'Neon Dreams Campaign',
       category: 'graphics',
-      image: '/images/work1.jpg',
+      image: '/projects/w1.jpg',
       description: 'Futuristic graphic series blending neon aesthetics with cyberpunk influences. This campaign explores the boundaries between digital and physical art forms.',
       year: '2024',
       tags: ['Poster', 'Digital', 'Minimalist', 'Cyberpunk']
@@ -43,7 +44,7 @@ const PortfolioPage = () => {
       id: 2,
       title: 'Quantum Brand Identity',
       category: 'branding',
-      image: '/images/work2.jpg',
+      image: '/projects/w3.jpg',
       description: 'Complete brand system for innovative tech startup focusing on quantum computing solutions. Includes logo, color palette, and brand guidelines.',
       year: '2024',
       tags: ['Logo', 'Brand Guide', 'Typography', 'Color Theory']
@@ -70,7 +71,7 @@ const PortfolioPage = () => {
       id: 5,
       title: 'Urban Brand Revival',
       category: 'branding',
-      image: '/images/work5.jpg',
+      image: '/projects/w4.jpg',
       description: 'Complete rebranding of established streetwear company. Modernized their identity while maintaining street credibility and heritage.',
       year: '2024',
       tags: ['Rebrand', 'Identity', 'Streetwear', 'Modern']
@@ -79,7 +80,7 @@ const PortfolioPage = () => {
       id: 6,
       title: 'Holographic Visuals',
       category: 'graphics',
-      image: '/images/work6.jpg',
+      image: '/projects/w2.jpg',
       description: 'Experimental graphics series featuring holographic effects and light refraction studies. Pushing the boundaries of digital art techniques.',
       year: '2024',
       tags: ['Experimental', 'Digital Art', 'Holographic', 'Innovation']
@@ -138,7 +139,7 @@ const PortfolioPage = () => {
     if (isModalOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleEscapeKey);
-      document.body.style.overflow = 'hidden'; // Prevent scroling
+      document.body.style.overflow = 'hidden';
     }
 
     return () => {
@@ -165,7 +166,11 @@ const PortfolioPage = () => {
     setIsModalOpen(false);
     setTimeout(() => {
       setSelectedProject(null);
-    }, 300); // Wait for animation to complete
+    }, 300);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -214,13 +219,13 @@ const PortfolioPage = () => {
 
               {/* Content Section */}
               <div className="flex flex-col h-full overflow-y-auto">
-                <div className="p-8 lg:p-12">
+                <div className="p-6 lg:p-12">
                   {/* Header */}
                   <div className="mb-6">
                     <span className="inline-block px-4 py-2 bg-white/10 rounded-full text-white text-sm font-semibold mb-4 border border-white/20">
                       {selectedProject.category}
                     </span>
-                    <h2 className="text-4xl font-bold text-white mb-4">{selectedProject.title}</h2>
+                    <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">{selectedProject.title}</h2>
                     <div className="flex items-center space-x-4 text-white/60">
                       <span className="text-sm">{selectedProject.year}</span>
                       <span className="w-1 h-1 bg-white/40 rounded-full"></span>
@@ -262,7 +267,7 @@ const PortfolioPage = () => {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex space-x-4">
+                  <div className="flex flex-col sm:flex-row gap-4">
                     <button className="flex-1 py-3 bg-white text-[#0f0f1f] rounded-xl font-bold hover:shadow-lg transition-all duration-300 text-center">
                       Download Assets
                     </button>
@@ -277,22 +282,60 @@ const PortfolioPage = () => {
         </div>
       )}
 
-      <div className="relative z-10 container mx-auto px-6 py-12">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-6xl font-black mb-6 tracking-tight">
+        <div className="text-center mb-12 sm:mb-16">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 sm:mb-6 tracking-tight">
             <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
               Our Portfolio
             </span>
           </h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed px-4">
             Discover our creative journey through innovative design solutions and brand transformations
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Mobile Category Filter */}
+        <div className="lg:hidden mb-8">
+          <div className="flex items-center justify-between bg-white/5 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+            <h2 className="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              Filter
+            </h2>
+            <button
+              onClick={toggleMobileMenu}
+              className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white border border-white/20"
+            >
+              {isMobileMenuOpen ? '✕' : '☰'}
+            </button>
+          </div>
+          
+          {isMobileMenuOpen && (
+            <div className="mt-4 bg-white/5 backdrop-blur-md rounded-2xl p-4 border border-white/10 animate-in fade-in-50">
+              <div className="space-y-2">
+                {categories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => {
+                      setActiveCategory(category.id);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 text-base font-semibold group relative overflow-hidden ${
+                      activeCategory === category.id
+                        ? 'bg-white/10 text-white border border-white/20'
+                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span className="relative z-10">{category.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8">
           {/* Left Column - Company Info & Slideshow */}
-          <div className="lg:col-span-1 space-y-8">
+          <div className="lg:col-span-1 space-y-6 sm:space-y-8 hidden lg:block">
             {/* Category Navigation */}
             <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
               <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
@@ -404,7 +447,7 @@ const PortfolioPage = () => {
 
           {/* Right Column - Portfolio Grid */}
           <div className="lg:col-span-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
               {filteredItems.map((item, index) => (
                 <PortfolioCard 
                   key={item.id} 
@@ -417,9 +460,9 @@ const PortfolioPage = () => {
 
             {/* Empty State */}
             {filteredItems.length === 0 && (
-              <div className="text-center py-24">
-                <h3 className="text-2xl font-bold text-white/80 mb-3">No projects found</h3>
-                <p className="text-white/60">We're working on new amazing projects in this category!</p>
+              <div className="text-center py-16 sm:py-24">
+                <h3 className="text-xl sm:text-2xl font-bold text-white/80 mb-3">No projects found</h3>
+                <p className="text-white/60 text-sm sm:text-base">We're working on new amazing projects in this category!</p>
               </div>
             )}
           </div>
@@ -438,6 +481,7 @@ interface PortfolioCardProps {
 
 const PortfolioCard = ({ item, index, onViewProject }: PortfolioCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <div
@@ -447,16 +491,26 @@ const PortfolioCard = ({ item, index, onViewProject }: PortfolioCardProps) => {
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => onViewProject(item)}
     >
       {/* Main Image Container */}
-      <div className="relative h-80 overflow-hidden rounded-3xl">
+      <div className="relative h-64 sm:h-80 overflow-hidden rounded-3xl">
         <Image
           src={item.image}
           alt={item.title}
           fill
-          className="object-cover transition-all duration-1000 group-hover:scale-110"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={`object-cover transition-all duration-1000 group-hover:scale-110 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          loading="lazy"
+          onLoad={() => setImageLoaded(true)}
         />
+        
+        {/* Loading Skeleton */}
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 animate-pulse" />
+        )}
         
         {/* Slow Motion Depth Effect */}
         <div 
@@ -466,58 +520,61 @@ const PortfolioCard = ({ item, index, onViewProject }: PortfolioCardProps) => {
         />
         
         {/* Floating Elements */}
-        <div className={`absolute top-4 left-4 transition-all duration-500 transform ${
+        <div className={`absolute top-3 sm:top-4 left-3 sm:left-4 transition-all duration-500 transform ${
           isHovered ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
         }`}>
-          <span className="px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-sm font-bold uppercase border border-white/30">
+          <span className="px-3 sm:px-4 py-1 sm:py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-xs sm:text-sm font-bold uppercase border border-white/30">
             {item.category}
           </span>
         </div>
 
-        <div className={`absolute top-4 right-4 transition-all duration-500 transform ${
+        <div className={`absolute top-3 sm:top-4 right-3 sm:right-4 transition-all duration-500 transform ${
           isHovered ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
         }`}>
-          <span className="px-3 py-2 bg-black/50 backdrop-blur-md rounded-full text-white text-sm border border-white/20">
+          <span className="px-2 sm:px-3 py-1 sm:py-2 bg-black/50 backdrop-blur-md rounded-full text-white text-xs sm:text-sm border border-white/20">
             {item.year}
           </span>
         </div>
 
         {/* Content Overlay - Appears on Hover */}
-        <div className={`absolute bottom-0 left-0 right-0 p-6 transition-all duration-700 transform ${
+        <div className={`absolute bottom-0 left-0 right-0 p-4 sm:p-6 transition-all duration-700 transform ${
           isHovered ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}>
-          <div className="bg-gradient-to-t from-black/90 to-transparent backdrop-blur-md rounded-2xl p-6 border border-white/10">
-            <h3 className="text-2xl font-bold text-white mb-3 leading-tight">
+          <div className="bg-gradient-to-t from-black/90 to-transparent backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/10">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 leading-tight">
               {item.title}
             </h3>
             
-            <p className="text-white/80 text-sm mb-4 leading-relaxed line-clamp-2">
+            <p className="text-white/80 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-2">
               {item.description}
             </p>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {item.tags.slice(0, 3).map((tag, tagIndex) => (
+            <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+              {item.tags.slice(0, 2).map((tag, tagIndex) => (
                 <span 
                   key={tagIndex}
-                  className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-white/80 text-xs border border-white/20 hover:bg-white/20 transition-all duration-300"
+                  className="px-2 sm:px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-white/80 text-xs border border-white/20 hover:bg-white/20 transition-all duration-300"
                 >
                   {tag}
                 </span>
               ))}
-              {item.tags.length > 3 && (
-                <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-white/60 text-xs border border-white/20">
-                  +{item.tags.length - 3}
+              {item.tags.length > 2 && (
+                <span className="px-2 sm:px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-white/60 text-xs border border-white/20">
+                  +{item.tags.length - 2}
                 </span>
               )}
             </div>
 
             {/* View Button */}
             <button 
-              onClick={() => onViewProject(item)}
-              className="w-full py-3 bg-white/20 backdrop-blur-md rounded-xl text-white text-sm font-semibold border border-white/20 hover:bg-white/30 hover:shadow-2xl hover:shadow-white/20 transition-all duration-500 transform hover:scale-105"
+              onClick={(e) => {
+                e.stopPropagation();
+                onViewProject(item);
+              }}
+              className="w-full py-2 sm:py-3 bg-white/20 backdrop-blur-md rounded-xl text-white text-xs sm:text-sm font-semibold border border-white/20 hover:bg-white/30 hover:shadow-2xl hover:shadow-white/20 transition-all duration-500 transform hover:scale-105"
             >
-              View Project Details
+              View Details
             </button>
           </div>
         </div>
@@ -527,8 +584,8 @@ const PortfolioCard = ({ item, index, onViewProject }: PortfolioCardProps) => {
       </div>
 
       {/* Minimal Always-Visible Title */}
-      <div className="absolute bottom-4 left-4 right-4 text-center transition-opacity duration-500 group-hover:opacity-0">
-        <h3 className="text-white font-semibold text-lg drop-shadow-2xl">
+      <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 transition-opacity duration-500 group-hover:opacity-0">
+        <h3 className="text-white font-semibold text-base sm:text-lg drop-shadow-2xl">
           {item.title}
         </h3>
       </div>
