@@ -20,7 +20,7 @@ const Testimonials = () => {
   const testimonials: Testimonial[] = [
     {
       id: 1,
-      name: "Sarah Chen",
+      name: "Mary Njeri",
       company: "NexTech Solutions",
       role: "Marketing Director",
       image: "/images/p1.jpg",
@@ -30,7 +30,7 @@ const Testimonials = () => {
     },
     {
       id: 2,
-      name: "Marcus Rodriguez",
+      name: "Martin Luther",
       company: "Urban Brew Co.",
       role: "Founder",
       image: "/images/p2.jpg",
@@ -40,7 +40,7 @@ const Testimonials = () => {
     },
     {
       id: 3,
-      name: "Elena Petrova",
+      name: "David Omondi",
       company: "Lumina Fashion",
       role: "Creative Director",
       image: "/images/p3.jpg",
