@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-/* eslint-disable prefer-const */
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 interface Testimonial {
@@ -11,14 +10,12 @@ interface Testimonial {
   role: string
   image: string
   content: string
-  rating: number
-  project: string
+  videoThumbnail: string
+  projectType: string
 }
 
 const Testimonials = () => {
-  const [activeTestimonial, setActiveTestimonial] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   const testimonials: Testimonial[] = [
     {
@@ -27,9 +24,9 @@ const Testimonials = () => {
       company: "NexTech Solutions",
       role: "Marketing Director",
       image: "/images/p1.jpg",
-      content: "SPingrapy transformed our brand identity completely. Their attention to detail and creative vision exceeded our expectations. The website they delivered increased our conversion rate by 45%.",
-      rating: 5,
-      project: "Brand Identity & Website"
+      videoThumbnail: "/thumbnails/1.png",
+      content: "SPingrapy didn't just design a website—they crafted an experience. The motion graphics and interactive elements they created have become the talk of our industry.",
+      projectType: "Interactive Website & Motion"
     },
     {
       id: 2,
@@ -37,9 +34,9 @@ const Testimonials = () => {
       company: "Urban Brew Co.",
       role: "Founder",
       image: "/images/p2.jpg",
-      content: "Working with SPingrapy was a game-changer for our startup. They understood our vision and created a stunning visual identity that perfectly captures our brand's essence.",
-      rating: 5,
-      project: "Complete Brand Package"
+      videoThumbnail: "/thumbnails/2.png",
+      content: "The brand film SPingrapy produced captured our essence perfectly. Every frame tells our story with such emotional depth and visual sophistication.",
+      projectType: "Brand Film & Identity"
     },
     {
       id: 3,
@@ -47,259 +44,205 @@ const Testimonials = () => {
       company: "Lumina Fashion",
       role: "Creative Director",
       image: "/images/p3.jpg",
-      content: "The motion graphics and visual storytelling SPingrapy created for our campaign were absolutely breathtaking. They brought our collection to life in ways we never imagined.",
-      rating: 5,
-      project: "Campaign Motion Graphics"
-    },
-    {
-      id: 4,
-      name: "David Kim",
-      company: "TechFlow Inc.",
-      role: "Product Manager",
-      image: "/images/p1.jpg",
-      content: "SPingrapy's UI/UX design transformed our product. The intuitive interface and stunning visuals they created significantly improved user engagement and satisfaction.",
-      rating: 5,
-      project: "UI/UX Design"
-    },
-    {
-      id: 5,
-      name: "Amanda Johnson",
-      company: "GreenLeaf Organics",
-      role: "CEO",
-      image: "/images/p2.jpg",
-      content: "From concept to execution, SPingrapy delivered exceptional work. Their strategic approach to our packaging design resulted in a 30% increase in shelf appeal.",
-      rating: 5,
-      project: "Packaging Design"
+      videoThumbnail: "/thumbnails/3.png",
+      content: "Working with SPingrapy felt like collaborating with artistic partners. They transformed our seasonal campaign into a visual masterpiece that trended globally.",
+      projectType: "Fashion Campaign"
     }
   ]
 
-  // Auto-rotate testimonials
   useEffect(() => {
-    if (isPaused) return
-
     const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
+      setActiveIndex((prev) => (prev + 1) % testimonials.length)
     }, 5000)
-
     return () => clearInterval(interval)
-  }, [isPaused, testimonials.length])
-
-  // Auto-scroll for cards
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current
-    if (!scrollContainer) return
-
-    let animationId: number
-    let scrollSpeed = 0.4
-
-    const autoScroll = () => {
-      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-        scrollContainer.scrollLeft = 0
-      } else {
-        scrollContainer.scrollLeft += scrollSpeed
-      }
-      animationId = requestAnimationFrame(autoScroll)
-    }
-
-    animationId = requestAnimationFrame(autoScroll)
-
-    return () => {
-      cancelAnimationFrame(animationId)
-    }
   }, [])
-
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <svg
-        key={i}
-        className={`w-4 h-4 ${i < rating ? 'text-yellow-400' : 'text-white/20'}`}
-        fill="currentColor"
-        viewBox="0 0 20 20"
-      >
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-      </svg>
-    ))
-  }
 
   return (
     <section className="relative py-20 bg-[#0f0f1f] overflow-hidden">
-      {/* Background Elements */}
+      {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-10 w-96 h-96 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-gradient-to-tl from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-white/5 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-20 w-80 h-80 bg-gradient-to-br from-purple-500/15 to-pink-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-gradient-to-tl from-blue-500/15 to-cyan-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-white/5 to-transparent rounded-full blur-3xl" />
+        
+        {/* Floating particles */}
+        <div className="absolute top-1/3 left-1/4 w-1 h-1 bg-white/40 rounded-full animate-float" />
+        <div className="absolute bottom-1/3 right-1/3 w-1.5 h-1.5 bg-purple-400/50 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-cyan-400/40 rounded-full animate-float" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 rounded-full border border-white/10 mb-6">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <span className="text-white/80 text-sm font-medium">Client Stories</span>
+          </div>
           <h2 className="text-4xl md:text-5xl font-black mb-6">
             <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
-              Client Stories
+              Visual Excellence, 
+            </span>
+            <br />
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+              Verified Impact
             </span>
           </h2>
           <p className="text-xl text-white/70 max-w-2xl mx-auto">
-            Discover how SPingrapy creations have transformed brands and delivered exceptional results for our valued clients.
+            Where creative vision meets measurable results. See how our media creations drive real impact.
           </p>
         </div>
 
-        {/* Main Testimonial Display */}
-        <div 
-          className="relative max-w-4xl mx-auto mb-16"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 md:p-12 border border-white/10 hover:border-white/20 transition-all duration-500">
-            {/* Rating */}
-            <div className="flex justify-center mb-6">
-              <div className="flex gap-1">
-                {renderStars(testimonials[activeTestimonial].rating)}
-              </div>
-            </div>
-
-            {/* Content */}
-            <blockquote className="text-2xl md:text-3xl text-center text-white/90 font-light leading-relaxed mb-8">
-              "{testimonials[activeTestimonial].content}"
-            </blockquote>
-
-            {/* Client Info */}
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-4 mb-4">
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/20">
-                  <Image
-                    src={testimonials[activeTestimonial].image}
-                    alt={testimonials[activeTestimonial].name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="text-left">
-                  <div className="text-white font-bold text-lg">
-                    {testimonials[activeTestimonial].name}
-                  </div>
-                  <div className="text-white/60 text-sm">
-                    {testimonials[activeTestimonial].role}, {testimonials[activeTestimonial].company}
+        {/* Main Testimonial Showcase */}
+        <div className="grid lg:grid-cols-2 gap-8 items-center mb-16">
+          {/* Video Thumbnail Side */}
+          <div className="relative group">
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md">
+              {/* Video Thumbnail with Play Button */}
+              <div className="aspect-video relative overflow-hidden">
+                <Image
+                  src={testimonials[activeIndex].videoThumbnail}
+                  alt={`${testimonials[activeIndex].company} Project`}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                
+                {/* Play Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:bg-white/30 transition-all duration-300">
+                    <div className="w-0 h-0 border-l-[12px] border-l-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1" />
                   </div>
                 </div>
-              </div>
-              <div className="inline-block px-4 py-2 bg-white/10 rounded-full text-white/80 text-sm font-medium">
-                {testimonials[activeTestimonial].project}
-              </div>
-            </div>
-          </div>
 
-          {/* Navigation Dots */}
-          <div className="flex justify-center gap-3 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTestimonial(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === activeTestimonial
-                    ? 'bg-white scale-125'
-                    : 'bg-white/30 hover:bg-white/50'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Scrolling Testimonial Cards */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-white text-center mb-8">
-            More Success Stories
-          </h3>
-          <div 
-            ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide py-4"
-          >
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                className="flex-shrink-0 w-80 bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer group"
-                onClick={() => setActiveTestimonial(index)}
-              >
-                {/* Rating */}
-                <div className="flex gap-1 mb-4">
-                  {renderStars(testimonial.rating)}
+                {/* Project Type Badge */}
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1.5 bg-black/60 backdrop-blur-md rounded-full text-white text-xs font-medium border border-white/20">
+                    {testimonials[activeIndex].projectType}
+                  </span>
                 </div>
+              </div>
 
-                {/* Content */}
-                <p className="text-white/80 text-sm leading-relaxed mb-4 line-clamp-3">
-                  "{testimonial.content}"
-                </p>
-
-                {/* Client Info */}
-                <div className="flex items-center gap-3">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/20">
+              {/* Client Info Overlay */}
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="flex items-center gap-3 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/20">
                     <Image
-                      src={testimonial.image}
-                      alt={testimonial.name}
+                      src={testimonials[activeIndex].image}
+                      alt={testimonials[activeIndex].name}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="object-cover"
                     />
                   </div>
                   <div>
                     <div className="text-white font-semibold text-sm">
-                      {testimonial.name}
+                      {testimonials[activeIndex].name}
                     </div>
                     <div className="text-white/60 text-xs">
-                      {testimonial.company}
+                      {testimonials[activeIndex].company}
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
 
-                {/* Project Tag */}
-                <div className="mt-3 px-3 py-1 bg-white/5 rounded-full text-white/60 text-xs font-medium inline-block">
-                  {testimonial.project}
+            {/* Floating Elements */}
+            <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-sm animate-pulse" />
+            <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-sm animate-pulse" />
+          </div>
+
+          {/* Testimonial Content Side */}
+          <div className="relative">
+            <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 h-full">
+              {/* Quote Icon */}
+              <div className="text-4xl text-white/20 mb-6">"</div>
+              
+              {/* Testimonial Text */}
+              <blockquote className="text-2xl text-white/90 leading-relaxed mb-8 font-light">
+                {testimonials[activeIndex].content}
+              </blockquote>
+
+              {/* Client Details */}
+              <div className="border-t border-white/10 pt-6">
+                <div className="text-white font-bold text-lg mb-1">
+                  {testimonials[activeIndex].name}
+                </div>
+                <div className="text-white/60 text-sm mb-2">
+                  {testimonials[activeIndex].role}, {testimonials[activeIndex].company}
+                </div>
+                <div className="text-purple-400 text-sm font-medium">
+                  {testimonials[activeIndex].projectType}
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Navigation */}
+            <div className="flex gap-3 mt-6">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveIndex(index)}
+                  className={`flex-1 h-1 rounded-full transition-all duration-500 ${
+                    index === activeIndex
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-500'
+                      : 'bg-white/20 hover:bg-white/40'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {[
-            { number: '98%', label: 'Client Satisfaction' },
-            { number: '150+', label: 'Projects Delivered' },
-            { number: '89%', label: 'Return Clients' },
-            { number: '4.9/5', label: 'Average Rating' }
-          ].map((stat, index) => (
-            <div key={index} className="text-center p-6 bg-white/5 rounded-2xl backdrop-blur-md border border-white/10 hover:border-white/20 transition-all duration-500">
-              <div className="text-3xl font-black mb-2 bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
-                {stat.number}
-              </div>
-              <div className="text-white/70 text-sm font-medium">{stat.label}</div>
+        {/* Client Logos Marquee */}
+        <div className="relative">
+          <div className="flex space-x-12 overflow-hidden py-4">
+            <div className="flex space-x-12 animate-marquee whitespace-nowrap">
+              {['TechFlow', 'Nova Studios', 'Urban Brew', 'Lumina', 'NexTech', 'GreenLeaf'].map((logo, index) => (
+                <div key={index} className="flex items-center">
+                  <div className="text-white/40 text-lg font-bold hover:text-white/60 transition-colors duration-300">
+                    {logo}
+                  </div>
+                  <div className="w-1 h-1 bg-white/20 rounded-full mx-6" />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center">
-          <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-md rounded-2xl p-12 border border-white/10 max-w-4xl mx-auto">
-            <h3 className="text-3xl font-bold text-white mb-4">
-              Ready to Become Our Next Success Story?
-            </h3>
-            <p className="text-white/70 mb-8 max-w-2xl mx-auto">
-              Join the growing list of satisfied clients who have transformed their vision into stunning reality with SPingrapy.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-white text-[#0f0f1f] rounded-xl font-bold hover:shadow-2xl hover:shadow-white/30 transition-all duration-300">
-                Start Your Project
-              </button>
-              <button className="px-8 py-4 bg-white/10 text-white rounded-xl font-bold border border-white/20 hover:bg-white/20 transition-all duration-300">
-                View Portfolio
-              </button>
+            <div className="flex space-x-12 animate-marquee2 whitespace-nowrap">
+              {['TechFlow', 'Nova Studios', 'Urban Brew', 'Lumina', 'NexTech', 'GreenLeaf'].map((logo, index) => (
+                <div key={index} className="flex items-center">
+                  <div className="text-white/40 text-lg font-bold hover:text-white/60 transition-colors duration-300">
+                    {logo}
+                  </div>
+                  <div className="w-1 h-1 bg-white/20 rounded-full mx-6" />
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute top-20 right-20 w-4 h-4 bg-white/20 rounded-full animate-pulse" />
-      <div className="absolute bottom-40 left-20 w-3 h-3 bg-purple-400/30 rounded-full animate-pulse" />
-      <div className="absolute top-1/2 right-40 w-2 h-2 bg-cyan-400/40 rounded-full animate-pulse" />
+      {/* Custom Animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-100%); }
+        }
+        @keyframes marquee2 {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(0); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        .animate-marquee2 {
+          animation: marquee2 30s linear infinite;
+        }
+      `}</style>
     </section>
   )
 }
