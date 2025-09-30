@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useAnimation } from 'framer-motion';
 
 interface Card {
   image: string;
@@ -16,7 +16,7 @@ interface CardsProps {
 
 const defaultCards: Card[] = [
   { 
-    image: "/images/c1.jpg", 
+    image: "/images/l1.jpg", 
     title: "Brand Identity", 
     subtitle: "Logo design, visual systems, and brand guidelines",
     accentColor: "#FF6B6B"
@@ -56,8 +56,15 @@ const defaultCards: Card[] = [
 const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [cardsWidth, setCardsWidth] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const controls = useAnimation();
+
+  // Duplicate cards for seamless looping
+  const duplicatedCards = [...cards, ...cards, ...cards];
 
   // Calculate dimensions
   const calculateDimensions = useCallback(() => {
@@ -66,7 +73,7 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
       const cardsContainer = cardsContainerRef.current;
       
       setContainerWidth(container.offsetWidth);
-      setCardsWidth(cardsContainer.scrollWidth);
+      setCardsWidth(cardsContainer.scrollWidth / 3); // Divide by 3 since we duplicated
     }
   }, []);
 
@@ -79,10 +86,31 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
     };
   }, [calculateDimensions]);
 
-  // Use scroll within the container with more lenient offsets
+  // Auto-scroll animation
+  useEffect(() => {
+    if (!isAutoPlaying || cardsWidth === 0) return;
+
+    const animation = controls.start({
+      x: [-cardsWidth, -cardsWidth * 2],
+      transition: {
+        x: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 40,
+          ease: "linear",
+        },
+      },
+    });
+
+    return () => {
+      controls.stop();
+    };
+  }, [controls, cardsWidth, isAutoPlaying]);
+
+  // Use scroll within the container
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"] // More lenient - starts when section enters viewport
+    offset: ["start start", "end start"]
   });
 
   // Apply spring for smooth animation
@@ -92,20 +120,41 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
     restDelta: 0.001
   });
 
-  // Calculate horizontal translation - only translate when in viewport
-  const scrollRange = Math.max(0, cardsWidth - containerWidth);
-  const xTransform = useTransform(
-    smoothProgress, 
-    [0, 1], 
-    [0, -scrollRange]
-  );
+  // Manual scroll with buttons
+  const scrollToIndex = (index: number) => {
+    if (cardsWidth === 0) return;
+    
+    setIsAutoPlaying(false);
+    const newIndex = (index + cards.length) % cards.length;
+    setCurrentIndex(newIndex);
+
+    const targetX = -newIndex * (cardsWidth / cards.length) * (cards.length / 3);
+    
+    controls.start({
+      x: targetX,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+      },
+    });
+
+    // Resume auto-play after 5 seconds
+    setTimeout(() => {
+      setIsAutoPlaying(true);
+    }, 5000);
+  };
+
+  // Handle manual scroll
+  const handleScroll = (direction: 'left' | 'right') => {
+    scrollToIndex(currentIndex + (direction === 'right' ? 1 : -1));
+  };
 
   return (
     <section
       ref={containerRef}
       className="relative w-full overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
       style={{
-        // Fixed height - no extra space
         height: '100vh',
       }}
     >
@@ -138,99 +187,145 @@ const Cards: React.FC<CardsProps> = ({ cards = defaultCards }) => {
           />
         </div>
 
-        {/* Horizontal scrolling cards container */}
-        <motion.div
-          ref={cardsContainerRef}
-          className="flex items-center gap-8 px-16 md:px-12 lg:px-16"
-          style={{ x: xTransform }}
-        >
-          {cards.map((card, index) => (
-            <motion.div
-              key={index}
-              className="flex-shrink-0 relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer"
-              style={{
-                width: 'clamp(300px, 50vw, 500px)',
-                height: '70vh',
-                minHeight: '500px',
-              }}
-              whileHover={{ 
-                scale: 1.03, 
-                y: -10,
-                transition: { 
-                  type: "spring", 
-                  stiffness: 300, 
-                  damping: 20 
-                } 
-              }}
-              whileTap={{ scale: 0.98 }}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              {/* Background Image */}
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ 
-                  backgroundImage: `url(${card.image})`,
-                }}
-              />
-              
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-              
-              {/* Animated Accent Border on hover */}
-              <div 
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"
-                style={{
-                  boxShadow: `0 0 0 2px ${card.accentColor}40, 0 0 30px ${card.accentColor}20`,
-                }}
-              />
-              
-              {/* Content */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white z-10">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div 
-                    className="w-12 h-1 mb-4 rounded-full"
-                    style={{ backgroundColor: card.accentColor }}
-                  />
-                  <h3 className="text-2xl md:text-4xl font-bold mb-2 tracking-tight">
-                    {card.title}
-                  </h3>
-                  <p className="text-base md:text-xl opacity-90 font-light mb-4 leading-relaxed">
-                    {card.subtitle}
-                  </p>
-                  
-                  {/* CTA Button */}
-                  <motion.button
-                    className="px-6 py-2 rounded-full font-medium text-sm backdrop-blur-sm border transition-all duration-300"
-                    style={{
-                      backgroundColor: `${card.accentColor}20`,
-                      borderColor: card.accentColor,
-                      color: card.accentColor
-                    }}
-                    whileHover={{
-                      backgroundColor: card.accentColor,
-                      color: 'white',
-                      scale: 1.05
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Explore Project
-                  </motion.button>
-                </motion.div>
-              </div>
+        {/* Navigation buttons */}
+        <div className="absolute right-10 top-1/2 transform -translate-y-1/2 z-20 flex flex-col gap-4">
+          <motion.button
+            className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => handleScroll('left')}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </motion.button>
+          <motion.button
+            className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => handleScroll('right')}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </motion.button>
+        </div>
 
-              {/* Hover Effect Layer */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500" />
-            </motion.div>
+        {/* Indicator dots */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
+          {cards.map((_, index) => (
+            <button
+              key={index}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentIndex 
+                  ? 'bg-white scale-125' 
+                  : 'bg-white/40 hover:bg-white/60'
+              }`}
+              onClick={() => scrollToIndex(index)}
+            />
           ))}
-        </motion.div>
+        </div>
+
+        {/* Horizontal scrolling cards container */}
+        <div 
+          ref={scrollContainerRef}
+          className="overflow-hidden w-full"
+        >
+          <motion.div
+            ref={cardsContainerRef}
+            className="flex items-center gap-8 px-16 md:px-12 lg:px-16"
+            animate={controls}
+          >
+            {duplicatedCards.map((card, index) => (
+              <motion.div
+                key={index}
+                className="flex-shrink-0 relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer"
+                style={{
+                  width: 'clamp(300px, 50vw, 500px)',
+                  height: '70vh',
+                  minHeight: '500px',
+                }}
+                whileHover={{ 
+                  scale: 1.03, 
+                  y: -10,
+                  transition: { 
+                    type: "spring", 
+                    stiffness: 300, 
+                    damping: 20 
+                  } 
+                }}
+                whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: (index % cards.length) * 0.1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                onHoverStart={() => setIsAutoPlaying(false)}
+                onHoverEnd={() => setIsAutoPlaying(true)}
+              >
+                {/* Background Image */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ 
+                    backgroundImage: `url(${card.image})`,
+                  }}
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                
+                {/* Animated Accent Border on hover */}
+                <div 
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"
+                  style={{
+                    boxShadow: `0 0 0 2px ${card.accentColor}40, 0 0 30px ${card.accentColor}20`,
+                  }}
+                />
+                
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white z-10">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 + (index % cards.length) * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div 
+                      className="w-12 h-1 mb-4 rounded-full"
+                      style={{ backgroundColor: card.accentColor }}
+                    />
+                    <h3 className="text-2xl md:text-4xl font-bold mb-2 tracking-tight">
+                      {card.title}
+                    </h3>
+                    <p className="text-base md:text-xl opacity-90 font-light mb-4 leading-relaxed">
+                      {card.subtitle}
+                    </p>
+                    
+                    {/* CTA Button */}
+                    <motion.button
+                      className="px-6 py-2 rounded-full font-medium text-sm backdrop-blur-sm border transition-all duration-300"
+                      style={{
+                        backgroundColor: `${card.accentColor}20`,
+                        borderColor: card.accentColor,
+                        color: card.accentColor
+                      }}
+                      whileHover={{
+                        backgroundColor: card.accentColor,
+                        color: 'white',
+                        scale: 1.05
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Explore Project
+                    </motion.button>
+                  </motion.div>
+                </div>
+
+                {/* Hover Effect Layer */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500" />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
       </div>
     </section>
