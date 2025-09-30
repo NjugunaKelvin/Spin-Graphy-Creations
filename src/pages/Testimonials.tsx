@@ -45,7 +45,7 @@ const Testimonials = () => {
       role: "Creative Director",
       image: "/images/p3.jpg",
       videoThumbnail: "/thumbnails/3.png",
-      content: "Working with SPingrapy felt like collaborating with artistic partners. They transformed our seasonal campaign into a visual masterpiece that trended globally.",
+      content: "Working with SPingrapy felt like collaborating with artistic partners. They transformed our seasonal campaign into a visual masterpiece that trended across all the social media platfroms.",
       projectType: "Fashion Campaign"
     }
   ]
