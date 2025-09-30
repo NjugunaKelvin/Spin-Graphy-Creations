@@ -35,7 +35,7 @@ const Testimonials = () => {
       role: "Founder",
       image: "/images/p2.jpg",
       videoThumbnail: "/thumbnails/2.png",
-      content: "The brand film SPingr.",
+      content: "Spingraphy handled all the branding of our company. From logo design to social media presence and even social media reels. .",
       projectType: "Brand Film & Identity"
     },
     {
