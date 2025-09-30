@@ -16,13 +16,13 @@ interface CardsProps {
 
 const defaultCards: Card[] = [
   { 
-    image: "/images/card1.jpg", 
+    image: "/images/c1.jpg", 
     title: "Brand Identity", 
     subtitle: "Logo design, visual systems, and brand guidelines",
     accentColor: "#FF6B6B"
   },
   { 
-    image: "/images/card2.jpg", 
+    image: "/images/v1.jpg", 
     title: "Motion Graphics", 
     subtitle: "Animated logos, explainer videos, and social media reels",
     accentColor: "#4ECDC4"
@@ -34,19 +34,19 @@ const defaultCards: Card[] = [
     accentColor: "#45B7D1"
   },
   { 
-    image: "/images/card4.jpg", 
+    image: "/images/g1.jpg", 
     title: "Graphics Design", 
     subtitle: "User-centered digital experiences and interfaces",
     accentColor: "#96CEB4"
   },
   { 
-    image: "/images/card5.jpg", 
+    image: "/images/pp1.jpg", 
     title: "Print & Packaging", 
     subtitle: "Business cards, brochures, and product packaging",
     accentColor: "#FFEAA7"
   },
   { 
-    image: "/images/card6.jpg", 
+    image: "/images/cs1.jpg", 
     title: "Creative Strategy", 
     subtitle: "End-to-end creative solutions for your brand",
     accentColor: "#DDA0DD"
