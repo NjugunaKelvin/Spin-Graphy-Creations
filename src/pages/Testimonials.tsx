@@ -25,7 +25,7 @@ const Testimonials = () => {
       role: "Marketing Director",
       image: "/images/p1.jpg",
       videoThumbnail: "/thumbnails/1.png",
-      content: "We've always trusted spingraphy",
+      content: "We've always trusted spingraphy creations to do our poster designs and true it, they have been reliable and excellent in the solutions they deliver",
       projectType: "Logo & Motion"
     },
     {
@@ -35,7 +35,7 @@ const Testimonials = () => {
       role: "Founder",
       image: "/images/p2.jpg",
       videoThumbnail: "/thumbnails/2.png",
-      content: "The brand film SPingrapy produced captured our essence perfectly. Every frame tells our story with such emotional depth and visual sophistication.",
+      content: "The brand film SPingr.",
       projectType: "Brand Film & Identity"
     },
     {
