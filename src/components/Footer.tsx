@@ -37,7 +37,7 @@ const Footer = () => {
 
               {/* Micro navigation */}
               <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-500">
-                {['Work', 'About', 'Contact'].map((item, index) => (
+                {['Portfolio', 'About', 'Contact'].map((item, index) => (
                   <Link
                     key={index}
                     href={`/${item.toLowerCase()}`}
