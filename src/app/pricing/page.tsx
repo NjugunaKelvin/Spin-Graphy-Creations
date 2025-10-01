@@ -12,6 +12,7 @@ interface PricingPlan {
   popular?: boolean
   buttonText: string
   buttonVariant: 'primary' | 'secondary'
+  paymentTerms: string
 }
 
 interface Service {
@@ -19,10 +20,12 @@ interface Service {
   name: string
   description: string
   basePrice: string
+  priceRange?: string
   deliveryTime: string
   revisions: string
   features: string[]
   addons: Addon[]
+  paymentTerms: string
 }
 
 interface Addon {
@@ -32,169 +35,176 @@ interface Addon {
 }
 
 const PricingPage = () => {
-  const [activeService, setActiveService] = useState<string>('graphics')
+  const [activeService, setActiveService] = useState<string>('quick-jobs')
 
   const pricingPlans: PricingPlan[] = [
     {
-      id: 'starter',
-      name: 'Starter',
-      description: 'Perfect for small projects and startups',
-      price: 'Ksh 20,000',
+      id: 'quick-jobs',
+      name: 'Quick Jobs',
+      description: 'Budget Clients & One-offs - Fast turnaround for individual projects',
+      price: 'From Ksh 1,500',
       period: '/project',
       features: [
         '1-2 Design Concepts',
-        '2 Revisions',
-        'Basic Brand Guidelines',
-        '5-7 Day Delivery',
+        '1-2 Revisions',
+        '24-48 Hour Delivery',
         'Source Files Included',
-        'Email Support'
+        'Perfect for one-time designs'
       ],
-      buttonText: 'Get Started',
-      buttonVariant: 'secondary'
+      buttonText: 'Start Quick Project',
+      buttonVariant: 'secondary',
+      paymentTerms: '100% upfront payment'
     },
     {
-      id: 'professional',
-      name: 'Professional',
-      description: 'Ideal for growing businesses',
-      price: 'Ksh 69,999',
-      period: '/project',
+      id: 'small-business',
+      name: 'Small Business',
+      description: 'Ideal for SMEs needing consistent branding & ongoing designs',
+      price: 'Ksh 25,000',
+      period: '/package',
       features: [
-        '3-4 Design Concepts',
+        '2-3 Logo Concepts',
         'Unlimited Revisions',
-        'Complete Brand Guidelines',
-        '3-5 Day Delivery',
-        'Source Files + Assets',
-        'Priority Support',
-        'Social Media Kit'
+        'Full Brand Guidelines',
+        'Social Media Starter Pack',
+        'Stationery Templates',
+        'Priority Support'
       ],
       popular: true,
-      buttonText: 'Most Popular',
-      buttonVariant: 'primary'
+      buttonText: 'Choose Package',
+      buttonVariant: 'primary',
+      paymentTerms: '50% upfront, 50% on completion'
     },
     {
-      id: 'enterprise',
-      name: 'Enterprise',
-      description: 'For large-scale brand transformations',
-      price: 'Ksh, 149,999',
-      period: '/project',
+      id: 'corporate',
+      name: 'Corporate',
+      description: 'For established businesses needing brand transformation',
+      price: 'Ksh 120,000',
+      period: '/package',
       features: [
-        '5+ Design Concepts',
+        '4-6 Logo Concepts',
         'Unlimited Revisions',
-        'Full Brand System',
-        '1-3 Day Rush Delivery',
-        'All Source Files',
-        'Dedicated Manager',
-        'Multi-Platform Assets',
-        'Brand Strategy Session'
+        'Full Corporate Brand Book',
+        'Multi-platform Assets',
+        'Dedicated Project Manager',
+        'Strategy Sessions',
+        'Presentation Design'
       ],
       buttonText: 'Contact Sales',
-      buttonVariant: 'secondary'
+      buttonVariant: 'secondary',
+      paymentTerms: '40% upfront, 30% mid-way, 30% on delivery'
     }
   ]
 
   const services: Service[] = [
     {
-      id: 'graphics',
-      name: 'Graphics Design',
-      description: 'Custom graphics for digital and print media',
-      basePrice: 'Ksh 29,999',
-      deliveryTime: '3-5 days',
-      revisions: '3 rounds',
+      id: 'quick-jobs',
+      name: 'Quick Jobs',
+      description: 'Fast turnaround designs for budget clients and one-off projects',
+      basePrice: 'From Ksh 1,500',
+      deliveryTime: '24-48 hours',
+      revisions: '1-2 rounds',
+      paymentTerms: '100% upfront',
       features: [
-        'Custom Illustration',
-        'Vector Graphics',
-        'Print-ready Files',
-        'Multiple Formats',
-        'Color Variations'
+        'Poster/Flyer Design - Ksh 2,000-3,500',
+        'Social Media Post - Ksh 1,500-2,500',
+        'Business Card Design - Ksh 3,000-5,000',
+        'Brochure (2-4 pages) - Ksh 6,000-12,000',
+        'Certificate/Invitation - Ksh 1,500-3,000',
+        'Event Branding Pack - From Ksh 12,000'
       ],
       addons: [
-        { name: 'Social Media Pack', price: '+Ksh 7,000', description: '10+ platform-optimized graphics' },
-        { name: 'Animation', price: '+Ksh 2,500', description: 'Basic motion graphics' },
-        { name: '3D Elements', price: 'Ksh 15,000', description: '3D modeling and rendering' }
+        { name: 'Rush Delivery (24hr)', price: '+50%', description: 'Priority turnaround' },
+        { name: 'Additional Revisions', price: '+Ksh 1,000', description: 'Extra revision rounds' },
+        { name: 'Multiple Formats', price: '+Ksh 500', description: 'Extra file formats' }
       ]
     },
     {
-      id: 'branding',
-      name: 'Brand Identity',
-      description: 'Complete brand system development',
-      basePrice: 'Ksh 49,999',
-      deliveryTime: '7-10 days',
+      id: 'retainers',
+      name: 'Monthly Retainers',
+      description: 'Ongoing design support with predictable monthly pricing',
+      basePrice: 'Ksh 30,000',
+      priceRange: 'Ksh 30,000 - 100,000+',
+      deliveryTime: '1-3 days',
       revisions: 'Unlimited',
+      paymentTerms: 'Monthly in advance',
       features: [
-        'Logo Design',
-        'Color Palette',
-        'Typography System',
-        'Brand Guidelines',
-        'Stationery Design'
+        'Starter Retainer - Ksh 30,000/month (10 design tasks)',
+        'Pro Retainer - Ksh 50,000/month (20 design tasks + priority)',
+        'Dedicated Designer - Ksh 80,000-100,000/month (unlimited requests)',
+        'Creative Support Retainer - Ksh 150,000+/month',
+        'Communication Design - Ksh 200,000+/month'
       ],
       addons: [
-        { name: 'Brand Strategy', price: '+Ksh 7,000', description: 'Market research and positioning' },
-        { name: 'Website Design', price: '+Ksh 12,500', description: 'Complete website mockups' },
-        { name: 'Packaging Design', price: '+Ksh, 19,999', description: 'Product packaging concepts' }
+        { name: 'Additional Tasks', price: '+Ksh 3,000', description: 'Extra design tasks per month' },
+        { name: 'Priority Queue', price: '+Ksh 10,000', description: 'Jump to front of line' },
+        { name: 'Video Editing', price: '+Ksh 20,000', description: 'Monthly video content' }
       ]
     },
     {
-      id: 'voice',
-      name: 'Voice Overs',
-      description: 'Professional voice recording services',
-      basePrice: 'Ksh 45,000',
-      deliveryTime: '2-3 days',
-      revisions: '2 rounds',
+      id: 'specialized',
+      name: 'Specialized Services',
+      description: 'Advanced creative services and add-ons',
+      basePrice: 'From Ksh 7,500',
+      deliveryTime: '3-7 days',
+      revisions: '2-3 rounds',
+      paymentTerms: '50% upfront',
       features: [
-        'Professional Recording',
-        'Audio Editing',
-        'Multiple Takes',
-        'Background Music',
-        '24hr Rush Delivery'
+        'Motion Graphics - From Ksh 7,500-20,000',
+        'Explainer Video (60-90sec) - Ksh 35,000-60,000',
+        'Voiceovers - From Ksh 10,000/min',
+        '3D Design/Rendering - Ksh 25,000-60,000',
+        'Social Media Marketing Pack - From Ksh 15,000',
+        'Website Design - Ksh 50,000-120,000'
       ],
       addons: [
-        { name: 'Multiple Voices', price: '+Ksh 4,999', description: 'Additional voice actors' },
-        { name: 'Sound Design', price: '+Ksh 9,999', description: 'Full audio production' },
-        { name: 'Translation', price: '+Ksh 15,999', description: 'Multi-language versions' }
+        { name: 'Multiple Revisions', price: '+Ksh 5,000', description: 'Additional revision rounds' },
+        { name: 'Commercial License', price: '+Ksh 10,000', description: 'Full commercial usage rights' },
+        { name: 'Source Files', price: 'Included', description: 'All editable source files' }
       ]
     },
     {
-      id: 'motion',
-      name: 'Motion Graphics',
-      description: 'Animated videos and visual effects',
-      basePrice: 'Ksh 49,999',
-      deliveryTime: '5-7 days',
-      revisions: '4 rounds',
+      id: 'partnerships',
+      name: 'Partnerships',
+      description: 'Agency and corporate partnership programs',
+      basePrice: 'Custom Pricing',
+      deliveryTime: 'Flexible',
+      revisions: 'Unlimited',
+      paymentTerms: 'Negotiable',
       features: [
-        '2D/3D Animation',
-        'Sound Design',
-        'Visual Effects',
-        'Multiple Resolutions',
-        'Source Files'
+        'Bulk Poster Design - Ksh 1,500/poster (min. 10/month)',
+        'White-label Branding - 20% discount on packages',
+        'Dedicated Designer - Ksh 80,000-120,000/month',
+        'NGO Contracts - Ksh 1M for 12 months support',
+        'Corporate Agreements - 6-12 month discounted pricing'
       ],
       addons: [
-        { name: '3D Animation', price: '+Ksh 15,000', description: 'Advanced 3D modeling' },
-        { name: 'Character Design', price: '+Ksh 30,000', description: 'Custom character creation' },
-        { name: 'VR/AR Ready', price: '+Ksh 50,000', description: 'Immersive experience optimization' }
+        { name: 'SLA Agreement', price: 'Custom', description: 'Service Level Agreement' },
+        { name: 'White-label Reporting', price: '+Ksh 5,000', description: 'Branded client reports' },
+        { name: 'Dedicated Support', price: '+Ksh 15,000', description: 'Priority account management' }
       ]
     }
   ]
 
   const faqs = [
     {
-      question: "How many revisions do I get?",
-      answer: "Revision limits vary by package. Starter includes 2 revisions, Professional offers unlimited revisions, and Enterprise includes unlimited revisions with priority handling."
+      question: "What payment plans do you offer?",
+      answer: "Quick Jobs: 100% upfront • Mid-Tier Projects: 50% upfront, 50% on completion • Large Projects (100K+): 40% upfront, 30% mid-way, 30% final delivery • Retainers: Monthly in advance • Corporate: Negotiable (quarterly invoicing available)"
     },
     {
-      question: "What's included in the source files?",
-      answer: "You receive all editable source files (AI, PSD, etc.), export files (PNG, JPG, PDF), and any additional assets created during the project."
+      question: "How many revisions are included?",
+      answer: "Quick Jobs: 1-2 revisions • Small Business Packages: Unlimited revisions • Corporate Packages: Unlimited revisions with priority handling • Retainers: Unlimited revisions within monthly scope"
     },
     {
-      question: "Can I upgrade my package mid-project?",
-      answer: "Yes, you can upgrade at any time. We'll prorate the difference and immediately apply the new package benefits to your ongoing project."
+      question: "What's your delivery timeline?",
+      answer: "Quick Jobs: 24-48 hours • Small Business Packages: 3-5 days • Corporate Packages: 7-10 days • Retainers: 1-3 days per task • Rush delivery available for additional fee"
     },
     {
       question: "Do you offer refunds?",
-      answer: "We offer a 100% satisfaction guarantee. If you're not happy with the initial concepts, we provide a full refund within the first 48 hours."
+      answer: "We offer a 100% satisfaction guarantee. If you're not happy with the initial concepts, we provide a full refund within the first 48 hours. For retainers, you can cancel anytime with 30 days notice."
     },
     {
-      question: "How do I get started?",
-      answer: "Simply choose a package, complete the booking form, and we'll schedule a kickoff call within 24 hours to discuss your project details."
+      question: "Can I upgrade my package mid-project?",
+      answer: "Yes, you can upgrade at any time. We'll prorate the difference and immediately apply the new package benefits to your ongoing project. Retainer upgrades take effect in the next billing cycle."
     }
   ]
 
@@ -212,7 +222,7 @@ const PricingPage = () => {
         <div className="text-center mb-16">
           <h1 className="text-6xl font-black mb-6 tracking-tight">
             <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
-              Pricing & Packages
+              Spingraphy Pricings
             </span>
           </h1>
           <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
@@ -226,10 +236,10 @@ const PricingPage = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-black mb-4">
               <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Project Packages
+                Pricing Plans
               </span>
             </h2>
-            <p className="text-white/70">All-inclusive packages for complete project solutions</p>
+            <p className="text-white/70">Choose the perfect plan for your creative needs</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -244,14 +254,14 @@ const PricingPage = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-black mb-4">
               <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Service Pricing
+                Service Details
               </span>
             </h2>
-            <p className="text-white/70">Custom pricing based on specific service needs</p>
+            <p className="text-white/70">Detailed pricing and options for each service category</p>
           </div>
 
           {/* Service Tabs */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="flex flex-wrap gap-4 justify-center mb-8">
               {services.map((service) => (
                 <button
@@ -279,13 +289,17 @@ const PricingPage = () => {
                 >
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
-                      <h3 className="text-2xl font-bold text-white mb-4">{service.name}</h3>
-                      <p className="text-white/70 mb-6">{service.description}</p>
+                      <h3 className="text-2xl font-bold text-white mb-2">{service.name}</h3>
+                      <p className="text-white/70 mb-4">{service.description}</p>
                       
-                      <div className="grid grid-cols-3 gap-4 mb-6">
+                      <div className="grid grid-cols-2 gap-4 mb-6">
                         <div className="text-center p-4 bg-white/5 rounded-xl">
                           <div className="text-lg font-bold text-white">{service.basePrice}</div>
                           <div className="text-white/60 text-sm">Starting Price</div>
+                        </div>
+                        <div className="text-center p-4 bg-white/5 rounded-xl">
+                          <div className="text-lg font-bold text-white">{service.paymentTerms}</div>
+                          <div className="text-white/60 text-sm">Payment Terms</div>
                         </div>
                         <div className="text-center p-4 bg-white/5 rounded-xl">
                           <div className="text-lg font-bold text-white">{service.deliveryTime}</div>
@@ -298,10 +312,10 @@ const PricingPage = () => {
                       </div>
 
                       <div className="space-y-3">
-                        <h4 className="font-semibold text-white">Includes:</h4>
+                        <h4 className="font-semibold text-white">Service Includes:</h4>
                         {service.features.map((feature, index) => (
                           <div key={index} className="flex items-center space-x-3">
-                            <div className="w-2 h-2 bg-white rounded-full"></div>
+                            <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
                             <span className="text-white/80 text-sm">{feature}</span>
                           </div>
                         ))}
@@ -393,12 +407,13 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
       <div className="text-center mb-6">
         <div className="text-4xl font-black text-white mb-1">{plan.price}</div>
         <div className="text-white/60 text-sm">{plan.period}</div>
+        <div className="text-white/50 text-xs mt-2">{plan.paymentTerms}</div>
       </div>
 
       <div className="space-y-4 mb-8">
         {plan.features.map((feature, index) => (
           <div key={index} className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-white rounded-full"></div>
+            <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
             <span className="text-white/80 text-sm">{feature}</span>
           </div>
         ))}
@@ -425,8 +440,8 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
         className="w-full px-6 py-4 text-left flex justify-between items-center"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="font-semibold text-white">{question}</span>
-        <span className={`text-white text-xl transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+        <span className="font-semibold text-white text-left pr-4">{question}</span>
+        <span className={`text-white text-xl transition-transform duration-300 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}>
           ↓
         </span>
       </button>
