@@ -304,7 +304,9 @@ const Landing = () => {
                      animation: 'gradientShift 3s ease infinite'
                    }} />
               <div className="absolute inset-0 bg-gray-900/80 rounded-lg backdrop-blur-sm" />
-              <span className="relative z-10">TALK TO US</span>
+              <a href="/contact">
+                <span className="relative z-10">TALK TO US</span>
+              </a>
             </motion.button>
             
             <motion.button
@@ -318,7 +320,9 @@ const Landing = () => {
                      animation: 'gradientShift 3s ease infinite'
                    }} />
               <div className="absolute inset-0 bg-transparent rounded-lg backdrop-blur-sm" />
-              <span className="relative z-10">OUR PORTFOLIO</span>
+              <a href="/portfolio">
+                <span className="relative z-10">OUR PORTFOLIO</span>
+              </a>
             </motion.button>
           </motion.div>
 

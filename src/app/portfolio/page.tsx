@@ -439,9 +439,11 @@ const PortfolioPage = () => {
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-500">
               <h3 className="text-lg font-bold text-white mb-3">Start Your Project</h3>
               <p className="text-white/70 text-sm mb-6 leading-relaxed">Ready to bring your vision to life?</p>
-              <button className="w-full py-4 bg-white text-[#0f0f1f] rounded-xl font-bold hover:shadow-2xl hover:shadow-white/30 transition-all duration-500 transform hover:scale-105">
+              <a href="/contact">
+                <button className="w-full py-4 bg-white text-[#0f0f1f] rounded-xl font-bold hover:shadow-2xl hover:shadow-white/30 transition-all duration-500 transform hover:scale-105">
                 Talk to Us
               </button>
+              </a>
             </div>
           </div>
 

@@ -213,9 +213,11 @@ const AboutPage = () => {
             >
               View Pricing
             </Link>
-            <button className="px-8 py-4 bg-white/10 text-white rounded-xl font-bold border border-white/20 hover:bg-white/20 transition-all duration-300">
+            <a href="/contact">
+              <button className="px-8 py-4 bg-white/10 text-white rounded-xl font-bold border border-white/20 hover:bg-white/20 transition-all duration-300">
               Contact Us
             </button>
+            </a>
           </div>
         </div>
       </div>

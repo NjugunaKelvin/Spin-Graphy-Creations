@@ -74,10 +74,7 @@ const Testimonials = () => {
       <div className="relative z-10 container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 rounded-full border border-white/10 mb-6">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-white/80 text-sm font-medium">Client Stories</span>
-          </div>
+          
           <h2 className="text-4xl md:text-5xl font-black mb-6">
             <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
               Visual Excellence, 
@@ -88,7 +85,7 @@ const Testimonials = () => {
             </span>
           </h2>
           <p className="text-xl text-white/70 max-w-2xl mx-auto">
-            Where creative vision meets measurable results. See how our media creations drive real impact.
+            Don't take our word. Here's what our clients have to say about our services and delivery
           </p>
         </div>
 
