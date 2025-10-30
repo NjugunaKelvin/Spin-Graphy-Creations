@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
+ /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable prefer-const */
 'use client'
 import { useState, useRef, useEffect } from 'react'
@@ -21,21 +21,21 @@ const Wall = () => {
       id: 1,
       type: 'color',
       src: '/designs/g1.jpg',
-      title: 'Sunset Gradient',
+      title: 'Simplix Design',
       category: 'Color Palette'
     },
     {
       id: 2,
       type: 'texture',
       src: '/designs/g2.jpg',
-      title: 'Concrete Surface',
+      title: 'Neatworks',
       category: 'Texture'
     },
     {
       id: 3,
       type: 'pattern',
       src: '/designs/g3.jpg',
-      title: 'Geometric Lines',
+      title: 'Line + Layer',
       category: 'Pattern'
     },
     {
