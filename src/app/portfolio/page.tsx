@@ -35,7 +35,7 @@ const PortfolioPage = () => {
       id: 1,
       title: 'Neon Dreams Campaign',
       category: 'graphics',
-      image: '/projects/w1.jpg',
+      image: '/projects/g1.jpg',
       description: 'Futuristic graphic series blending neon aesthetics with cyberpunk influences. This campaign explores the boundaries between digital and physical art forms.',
       year: '2024',
       tags: ['Poster', 'Digital', 'Minimalist', 'Cyberpunk']
@@ -44,7 +44,7 @@ const PortfolioPage = () => {
       id: 2,
       title: 'Quantum Brand Identity',
       category: 'branding',
-      image: '/projects/w3.jpg',
+      image: '/projects/g2.jpg',
       description: 'Complete brand system for innovative tech startup focusing on quantum computing solutions. Includes logo, color palette, and brand guidelines.',
       year: '2024',
       tags: ['Logo', 'Brand Guide', 'Typography', 'Color Theory']
@@ -53,7 +53,7 @@ const PortfolioPage = () => {
       id: 3,
       title: 'Cosmic Animation',
       category: 'motion',
-      image: '/images/work3.jpg',
+      image: '/projects/g3.jpg',
       description: '3D motion graphics exploring cosmic themes and interstellar journeys. Created using advanced particle systems and lighting techniques.',
       year: '2023',
       tags: ['3D', 'Animation', 'VFX', 'Cinematic']
@@ -62,7 +62,7 @@ const PortfolioPage = () => {
       id: 4,
       title: 'Ethereal Voice Narrative',
       category: 'voice',
-      image: '/images/work4.jpg',
+      image: '/projects/g4.jpg',
       description: 'Immersive voice over for documentary series about deep space exploration. Features atmospheric sound design and professional narration.',
       year: '2023',
       tags: ['Narration', 'Audio', 'Sound Design', 'Documentary']
@@ -71,7 +71,7 @@ const PortfolioPage = () => {
       id: 5,
       title: 'Urban Brand Revival',
       category: 'branding',
-      image: '/projects/w4.jpg',
+      image: '/projects/g5.jpg',
       description: 'Complete rebranding of established streetwear company. Modernized their identity while maintaining street credibility and heritage.',
       year: '2024',
       tags: ['Rebrand', 'Identity', 'Streetwear', 'Modern']
@@ -80,7 +80,43 @@ const PortfolioPage = () => {
       id: 6,
       title: 'Holographic Visuals',
       category: 'graphics',
-      image: '/projects/w2.jpg',
+      image: '/projects/g6.jpg',
+      description: 'Experimental graphics series featuring holographic effects and light refraction studies. Pushing the boundaries of digital art techniques.',
+      year: '2024',
+      tags: ['Experimental', 'Digital Art', 'Holographic', 'Innovation']
+    },
+    {
+      id: 7,
+      title: 'Holographic Visuals',
+      category: 'graphics',
+      image: '/projects/l1.jpg',
+      description: 'Experimental graphics series featuring holographic effects and light refraction studies. Pushing the boundaries of digital art techniques.',
+      year: '2024',
+      tags: ['Experimental', 'Digital Art', 'Holographic', 'Innovation']
+    },
+    {
+      id: 8,
+      title: 'Holographic Visuals',
+      category: 'graphics',
+      image: '/projects/g2.jpg',
+      description: 'Experimental graphics series featuring holographic effects and light refraction studies. Pushing the boundaries of digital art techniques.',
+      year: '2024',
+      tags: ['Experimental', 'Digital Art', 'Holographic', 'Innovation']
+    },
+    {
+      id: 9,
+      title: 'Holographic Visuals',
+      category: 'graphics',
+      image: '/projects/l1.jpg',
+      description: 'Experimental graphics series featuring holographic effects and light refraction studies. Pushing the boundaries of digital art techniques.',
+      year: '2024',
+      tags: ['Experimental', 'Digital Art', 'Holographic', 'Innovation']
+    },
+    {
+      id: 10,
+      title: 'Holographic Visuals',
+      category: 'graphics',
+      image: '/projects/g1.jpg',
       description: 'Experimental graphics series featuring holographic effects and light refraction studies. Pushing the boundaries of digital art techniques.',
       year: '2024',
       tags: ['Experimental', 'Digital Art', 'Holographic', 'Innovation']

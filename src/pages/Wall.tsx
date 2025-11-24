@@ -20,56 +20,56 @@ const Wall = () => {
     {
       id: 1,
       type: 'color',
-      src: '/designs/g1.jpg',
+      src: '/projects/g1.jpg',
       title: 'Simplix Design',
       category: 'Color Palette'
     },
     {
       id: 2,
       type: 'texture',
-      src: '/designs/g2.jpg',
+      src: '/projects/g2.jpg',
       title: 'Neatworks',
       category: 'Texture'
     },
     {
       id: 3,
       type: 'pattern',
-      src: '/designs/g3.jpg',
+      src: '/projects/g3.jpg',
       title: 'Line + Layer',
       category: 'Pattern'
     },
     {
       id: 4,
       type: 'art',
-      src: '/designs/g4.jpg',
+      src: '/projects/g4.jpg',
       title: 'Urban Architecture',
       category: 'Inspiration'
     },
     {
       id: 5,
       type: 'color',
-      src: '/images/card2.jpg',
+      src: '/projects/g5.jpg',
       title: 'Ocean Blues',
       category: 'Color Palette'
     },
     {
       id: 6,
       type: 'texture',
-      src: '/images/card6.jpg',
+      src: '/projects/g6.jpg',
       title: 'Paper Texture',
       category: 'Texture'
     },
     {
       id: 7,
       type: 'pattern',
-      src: '/images/work3.jpg',
+      src: '/projects/g7.jpg',
       title: 'Organic Shapes',
       category: 'Pattern'
     },
     {
       id: 8,
       type: 'art',
-      src: '/images/work9.jpg',
+      src: '/projects/g1.jpg',
       title: 'Digital Art',
       category: 'Inspiration'
     }
