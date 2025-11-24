@@ -377,7 +377,7 @@ const Landing = () => {
               whileTap={{ scale: 0.98 }}
               className="relative px-6 md:px-8 py-3 md:py-4 bg-transparent text-white font-bold text-base md:text-lg rounded-lg overflow-hidden group border-2 border-gray-400"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-400 via-gray-200 to-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-600 via-gray-400 to-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"
                    style={{ 
                      backgroundSize: '200% 100%',
                      animation: 'gradientShift 3s ease infinite'
