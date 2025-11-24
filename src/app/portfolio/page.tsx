@@ -16,17 +16,17 @@ type PortfolioItem = {
 const portfolioItems: PortfolioItem[] = [
   {
     id: 1,
-    title: 'Neon Dreams Campaign',
+    title: 'Followers campaign',
     category: 'graphics',
     image: '/projects/g1.jpg',
     description: 'Futuristic graphic series blending neon aesthetics with cyberpunk influences.',
-    year: '2024',
+    year: '2025',
     tags: ['Poster', 'Digital', 'Minimalist', 'Cyberpunk']
   },
   {
     id: 2,
     title: 'Quantum Brand Identity',
-    category: 'branding',
+    category: 'graphics',
     image: '/projects/g2.jpg',
     description: 'Complete brand system for innovative tech startup focusing on quantum computing.',
     year: '2024',
@@ -35,7 +35,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 3,
     title: 'Cosmic Animation',
-    category: 'motion',
+    category: 'graphics',
     image: '/projects/g3.jpg',
     description: '3D motion graphics exploring cosmic themes and interstellar journeys.',
     year: '2023',
@@ -44,7 +44,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 4,
     title: 'Ethereal Voice Narrative',
-    category: 'voice',
+    category: 'graphics',
     image: '/projects/g4.jpg',
     description: 'Immersive voice over for documentary series about deep space exploration.',
     year: '2023',
@@ -53,7 +53,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 5,
     title: 'Urban Brand Revival',
-    category: 'branding',
+    category: 'graphics',
     image: '/projects/g5.jpg',
     description: 'Complete rebranding of established streetwear company.',
     year: '2024',
@@ -80,8 +80,8 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 8,
     title: 'Future Music Poster',
-    category: 'graphics',
-    image: '/projects/g2.jpg',
+    category: 'branding',
+    image: '/projects/l2.png',
     description: 'Event poster for an electronic music festival.',
     year: '2024',
     tags: ['Poster', 'Glitch Art', 'Festival', 'Vibrant']
@@ -89,8 +89,8 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 9,
     title: 'Sci-Fi Voice Promo',
-    category: 'voice',
-    image: '/projects/l1.jpg',
+    category: 'graphics',
+    image: '/projects/g7.jpg',
     description: 'Trailer voice over for a new sci-fi series.',
     year: '2024',
     tags: ['Trailer', 'Deep Voice', 'Sci-Fi', 'Audio Mix']
@@ -98,8 +98,43 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 10,
     title: 'Animated Brand Reveal',
-    category: 'motion',
-    image: '/projects/g1.jpg',
+    category: 'graphics',
+    image: '/projects/g8.png',
+    description: 'Smooth motion graphic for brand logo reveal.',
+    year: '2024',
+    tags: ['Logo Reveal', 'Abstract', 'Fluid', 'After Effects']
+  },
+  {
+    id: 11,
+    title: 'Animated Brand Reveal',
+    category: 'branding',
+    image: '/projects/l3.png',
+    description: 'Smooth motion graphic for brand logo reveal.',
+    year: '2024',
+    tags: ['Logo Reveal', 'Abstract', 'Fluid', 'After Effects']
+  },{
+    id: 12,
+    title: 'Animated Brand Reveal',
+    category: 'graphics',
+    image: '/projects/g9.png',
+    description: 'Smooth motion graphic for brand logo reveal.',
+    year: '2024',
+    tags: ['Logo Reveal', 'Abstract', 'Fluid', 'After Effects']
+  },
+  {
+    id: 13,
+    title: 'Animated Brand Reveal',
+    category: 'branding',
+    image: '/projects/l4.png',
+    description: 'Smooth motion graphic for brand logo reveal.',
+    year: '2024',
+    tags: ['Logo Reveal', 'Abstract', 'Fluid', 'After Effects']
+  },
+  {
+    id: 14,
+    title: 'Animated Brand Reveal',
+    category: 'graphics',
+    image: '/projects/g10.png',
     description: 'Smooth motion graphic for brand logo reveal.',
     year: '2024',
     tags: ['Logo Reveal', 'Abstract', 'Fluid', 'After Effects']
@@ -413,14 +448,14 @@ const PortfolioPage = () => {
       )}
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        
+        <br /><br />
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
           <p className="text-base text-gray-400 uppercase tracking-wider font-medium">
             Our Creative Work
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Portfolio
+            Our Portfolio
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Explore our collection of creative projects and design solutions
